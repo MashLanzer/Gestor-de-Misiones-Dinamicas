@@ -28,13 +28,11 @@
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-
 body{
   background:var(--bg);color:var(--text);
   font-family:'EB Garamond',Georgia,serif;
   font-size:16px;line-height:1.7;min-height:100vh;
 }
-
 body::before{
   content:'';position:fixed;inset:0;
   background:
@@ -42,18 +40,14 @@ body::before{
     radial-gradient(ellipse 60% 80% at 85% 85%,rgba(58,26,106,.05) 0%,transparent 60%);
   pointer-events:none;z-index:0;
 }
-
 .site-header{position:relative;z-index:1;padding:44px 44px 28px;border-bottom:1px solid var(--border2)}
 .eyebrow{font-family:'Cinzel',serif;font-size:.65em;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
 .site-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.2em,3vw,1.9em);color:#e8dcc8;font-weight:700;line-height:1.15;margin-bottom:6px;text-shadow:0 0 40px rgba(184,146,42,.18)}
 .site-sub{font-style:italic;color:var(--dim);font-size:.9em}
-
 .main{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:32px 44px 80px}
-
 .sec-head{display:flex;align-items:center;gap:12px;padding-bottom:10px;margin-bottom:24px;border-bottom:1px solid var(--border2)}
 .sec-label{font-family:'Cinzel',serif;font-size:.75em;letter-spacing:2px;text-transform:uppercase;flex:1}
 .sec-label.gold{color:var(--gold-l)}
-
 .btn-add{
   font-family:'Cinzel',serif;font-size:.62em;letter-spacing:1px;
   padding:6px 16px;border-radius:4px;cursor:pointer;
@@ -61,14 +55,12 @@ body::before{
   transition:all .2s;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;
 }
 .btn-add:hover{border-color:var(--gold);color:var(--gold-p);background:rgba(184,146,42,.05)}
-
 .btn-del{
   background:none;border:none;color:var(--muted);cursor:pointer;
   font-size:1.1em;padding:2px 6px;border-radius:3px;
   transition:color .15s;line-height:1;flex-shrink:0;
 }
 .btn-del:hover{color:var(--red)}
-
 .btn-small{
   font-family:'Cinzel',serif;font-size:.56em;letter-spacing:.5px;
   padding:4px 10px;border-radius:3px;border:1px dashed var(--border2);
@@ -76,13 +68,11 @@ body::before{
 }
 .btn-small:hover{border-color:var(--gold);color:var(--gold)}
 
-/* REGION */
 .region-card{
   background:var(--bg2);border:1px solid var(--border);
   border-radius:12px;margin-bottom:20px;overflow:hidden;
   border-left:3px solid var(--gold);
 }
-
 .region-header{
   display:flex;align-items:center;gap:12px;
   padding:18px 22px;cursor:pointer;user-select:none;
@@ -90,12 +80,10 @@ body::before{
 }
 .region-header:hover{background:var(--bg3)}
 .region-header.open{border-bottom-color:var(--border)}
-
 .region-num{
   font-family:'Cinzel',serif;font-size:.75em;color:var(--gold-l);
   letter-spacing:2px;font-weight:700;white-space:nowrap;
 }
-
 .region-name-f{
   font-family:'Cinzel',serif;font-size:1em;font-weight:600;color:#dde0e8;
   background:transparent;border:none;outline:none;flex:1;cursor:text;
@@ -104,7 +92,6 @@ body::before{
 }
 .region-name-f:hover{border-color:var(--border2)}
 .region-name-f:focus{border-color:var(--gold);color:var(--gold-p)}
-
 .region-desc-f{
   font-size:.82em;color:var(--dim);font-style:italic;
   background:transparent;border:none;outline:none;width:100%;
@@ -112,19 +99,15 @@ body::before{
 }
 .region-desc-f:hover{border-color:var(--border2)}
 .region-desc-f:focus{border-color:var(--gold);color:var(--text)}
-
 .region-chevron{color:var(--muted);font-size:.9em;transition:transform .25s;flex-shrink:0}
 .region-chevron.open{transform:rotate(90deg)}
-
 .region-body{display:none;padding:0 22px 20px}
 .region-body.open{display:block}
 
-/* PLACE */
 .place-card{
   background:var(--bg3);border:1px solid var(--border);
   border-radius:8px;margin:10px 0;overflow:hidden;
 }
-
 .place-header{
   display:flex;align-items:center;gap:10px;
   padding:14px 16px;cursor:pointer;user-select:none;
@@ -132,9 +115,7 @@ body::before{
 }
 .place-header:hover{background:rgba(255,255,255,.02)}
 .place-header.open{border-bottom-color:var(--border)}
-
 .place-icon{font-size:1.4em;flex-shrink:0}
-
 .place-name-f{
   font-family:'Cinzel',serif;font-size:.88em;font-weight:600;color:var(--text);
   background:transparent;border:none;outline:none;flex:1;cursor:text;
@@ -142,25 +123,19 @@ body::before{
 }
 .place-name-f:hover{border-color:var(--border2)}
 .place-name-f:focus{border-color:var(--amber-l);color:var(--amber-l)}
-
 .place-chevron{color:var(--muted);font-size:.8em;transition:transform .25s;flex-shrink:0}
 .place-chevron.open{transform:rotate(90deg)}
-
 .place-body{display:none;padding:0 16px 14px}
 .place-body.open{display:block}
 
-/* QUEST */
 .quest-card{
   background:var(--bg2);border:1px solid var(--border);
   border-radius:8px;margin:8px 0;padding:16px 18px;
   position:relative;border-left:2px solid var(--purple-l);
-  transition:border-color .2s;
 }
-
 .quest-head{
   display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;
 }
-
 .quest-title-f{
   font-family:'Cinzel',serif;font-size:.95em;font-weight:600;color:#e0e4f0;
   background:transparent;border:none;outline:none;flex:1;cursor:text;
@@ -168,13 +143,11 @@ body::before{
 }
 .quest-title-f:hover{border-bottom-color:var(--border2)}
 .quest-title-f:focus{border-bottom-color:var(--gold-p);color:var(--gold-p)}
-
 .quest-field{margin:8px 0}
 .quest-field label{
   font-family:'Cinzel',serif;font-size:.6em;letter-spacing:1.5px;
   color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px;
 }
-
 .quest-input{
   width:100%;background:var(--bg);border:1px solid var(--border);
   border-radius:6px;color:var(--text);padding:8px 12px;
@@ -183,7 +156,6 @@ body::before{
 }
 .quest-input:focus{border-color:var(--gold)}
 .quest-input::placeholder{color:var(--muted);font-style:italic}
-
 .quest-meta{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 .quest-meta-item{flex:1;min-width:120px}
 .quest-meta-item label{
@@ -197,7 +169,6 @@ body::before{
 }
 .quest-meta-input:focus{border-color:var(--gold-l)}
 
-/* PILLS */
 .pills-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:10px 0}
 .pill-lbl{font-family:'Cinzel',serif;font-size:.55em;letter-spacing:1px;color:var(--muted);margin-right:3px}
 .pill{
@@ -214,13 +185,11 @@ body::before{
 .pill.p-blue{background:#060e20;color:#6699cc;border-color:#1a3a6a}
 .pill.p-purple{background:#0d0618;color:#aa77ee;border-color:#3a1a6a}
 
-/* SECTIONS */
 .quest-section{margin:12px 0;padding:12px 14px;background:var(--bg);border-radius:6px;border:1px solid var(--border)}
 .quest-section h4{
   font-family:'Cinzel',serif;font-size:.72em;letter-spacing:1.5px;
   color:var(--gold-l);margin-bottom:8px;text-transform:uppercase;
 }
-
 .variation-item{
   background:var(--bg2);border:1px solid var(--border);
   border-radius:5px;padding:10px 12px;margin:6px 0;position:relative;
@@ -228,7 +197,6 @@ body::before{
 .variation-item label{
   font-family:'Cinzel',serif;font-size:.58em;letter-spacing:1px;color:var(--amber-l);display:block;margin-bottom:4px;
 }
-
 .task-list{list-style:none;padding:0}
 .task-item{
   display:flex;align-items:flex-start;gap:8px;
@@ -254,14 +222,12 @@ body::before{
   border:1px solid rgba(184,146,42,.2);border-radius:6px;padding:12px 14px;margin:10px 0;
 }
 .reward-box h4{color:var(--gold-l);margin-bottom:6px}
-
 .gm-notes{
   background:rgba(204,51,51,.05);border:1px solid rgba(204,51,51,.15);
   border-radius:6px;padding:12px 14px;margin:10px 0;
 }
 .gm-notes h4{color:var(--red);margin-bottom:6px}
 
-/* MODAL */
 .modal-overlay{
   display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);
   z-index:999;align-items:center;justify-content:center;backdrop-filter:blur(4px);
@@ -346,21 +312,18 @@ body::before{
   </div>
 </div>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal" id="modal-box"></div>
 </div>
 
 <script>
-// ══════════════════════════════
 // STORAGE
-// ══════════════════════════════
-const KEY = 'ecos_missions_v2';
-let DATA = { regions: [] };
+var KEY = 'ecos_missions_v3';
+var DATA = { regions: [] };
 
 function loadD(){
   try{ 
-    const d = localStorage.getItem(KEY); 
+    var d = localStorage.getItem(KEY); 
     if(d) DATA = JSON.parse(d); 
   } catch(e){
     console.error('Error loading:', e);
@@ -392,26 +355,21 @@ function ar(el){
 }
 
 function debounce(fn, ms){ 
-  let t; 
-  return function(...args){ 
+  var t; 
+  return function(){ 
+    var args = arguments;
+    var ctx = this;
     clearTimeout(t); 
-    t = setTimeout(() => fn.apply(this, args), ms); 
+    t = setTimeout(function(){ fn.apply(ctx, args); }, ms); 
   }; 
 }
 
-// ══════════════════════════════
 // MODAL ENGINE
-// ══════════════════════════════
 function openModal(html, onConfirm){
-  const box = document.getElementById('modal-box');
-  box.innerHTML = html + `
-    <div class="modal-btns">
-      <button class="btn-cancel" id="modal-cancel">Cancelar</button>
-      <button class="btn-ok" id="modal-ok">Crear</button>
-    </div>`;
+  var box = document.getElementById('modal-box');
+  box.innerHTML = html + '<div class="modal-btns"><button class="btn-cancel" id="modal-cancel">Cancelar</button><button class="btn-ok" id="modal-ok">Crear</button></div>';
   
   document.getElementById('modal-overlay').classList.add('open');
-  
   document.getElementById('modal-cancel').onclick = closeModal;
   document.getElementById('modal-ok').onclick = function(){
     onConfirm(); 
@@ -428,20 +386,18 @@ document.getElementById('modal-overlay').addEventListener('click', function(e){
 });
 
 function gv(id){ 
-  const el = document.getElementById(id); 
+  var el = document.getElementById(id); 
   return el ? el.value.trim() : ''; 
 }
 
-// ══════════════════════════════
 // STATS
-// ══════════════════════════════
 function updateStats(){
-  let places = 0, quests = 0;
-  for(let i = 0; i < DATA.regions.length; i++){
-    const r = DATA.regions[i];
+  var places = 0, quests = 0;
+  for(var i = 0; i < DATA.regions.length; i++){
+    var r = DATA.regions[i];
     if(r.places){
       places += r.places.length;
-      for(let j = 0; j < r.places.length; j++){
+      for(var j = 0; j < r.places.length; j++){
         if(r.places[j].quests){
           quests += r.places[j].quests.length;
         }
@@ -453,10 +409,8 @@ function updateStats(){
   document.getElementById('stat-quests').textContent = quests;
 }
 
-// ══════════════════════════════
 // PILLS
-// ══════════════════════════════
-const pillMap = {
+var pillMap = {
   activa:'p-red',
   disponible:'p-green',
   completada:'p-green',
@@ -469,14 +423,13 @@ const pillMap = {
 };
 
 function buildPills(item){
-  const st = item.status || '';
-  let h = '<div class="pills-row"><span class="pill-lbl">ESTADO:</span>';
-  
-  const states = ['disponible','activa','en curso','completada','fallida','bloqueada','opcional','repetible'];
-  for(let i = 0; i < states.length; i++){
-    const s = states[i];
-    const on = (st === s);
-    const cls = on ? ('on ' + (pillMap[s] || 'p-blue')) : (pillMap[s] || '');
+  var st = item.status || '';
+  var h = '<div class="pills-row"><span class="pill-lbl">ESTADO:</span>';
+  var states = ['disponible','activa','en curso','completada','fallida','bloqueada','opcional','repetible'];
+  for(var i = 0; i < states.length; i++){
+    var s = states[i];
+    var on = (st === s);
+    var cls = on ? ('on ' + (pillMap[s] || 'p-blue')) : (pillMap[s] || '');
     h += '<span class="pill ' + cls + '" data-val="' + s + '">' + s + '</span>';
   }
   h += '</div>';
@@ -484,13 +437,13 @@ function buildPills(item){
 }
 
 function attachPills(container, item, renderFn){
-  const pills = container.querySelectorAll('.pill[data-val]');
-  for(let i = 0; i < pills.length; i++){
+  var pills = container.querySelectorAll('.pill[data-val]');
+  for(var i = 0; i < pills.length; i++){
     (function(pill){
       pill.onclick = function(e){
         e.preventDefault();
         e.stopPropagation();
-        const v = this.getAttribute('data-val');
+        var v = this.getAttribute('data-val');
         item.status = (item.status === v) ? '' : v;
         saveD();
         renderFn();
@@ -499,50 +452,44 @@ function attachPills(container, item, renderFn){
   }
 }
 
-// ══════════════════════════════
 // RENDER REGIONS
-// ══════════════════════════════
 function renderRegions(){
-  console.log('renderRegions called, regions:', DATA.regions.length);
-  
-  const c = document.getElementById('container-regions');
+  var c = document.getElementById('container-regions');
   c.innerHTML = '';
   
-  for(let ri = 0; ri < DATA.regions.length; ri++){
+  for(var ri = 0; ri < DATA.regions.length; ri++){
     (function(region, index){
-      const div = document.createElement('div');
+      var div = document.createElement('div');
       div.className = 'region-card';
       
-      const placeCount = (region.places) ? region.places.length : 0;
-      let questCount = 0;
+      var placeCount = (region.places) ? region.places.length : 0;
+      var questCount = 0;
       if(region.places){
-        for(let p = 0; p < region.places.length; p++){
+        for(var p = 0; p < region.places.length; p++){
           if(region.places[p].quests){
             questCount += region.places[p].quests.length;
           }
         }
       }
       
-      div.innerHTML = 
-        '<div class="region-header' + (region.open ? ' open' : '') + '" data-ri="' + index + '">' +
-          '<span class="region-num">REGIÓN ' + (index + 1) + '</span>' +
-          '<div style="flex:1;min-width:0">' +
-            '<input class="region-name-f" value="' + esc(region.name) + '" placeholder="Nombre de la región...">' +
-            '<input class="region-desc-f" value="' + esc(region.desc || '') + '" placeholder="Descripción breve...">' +
-          '</div>' +
-          '<span style="font-family:Cinzel,serif;font-size:.6em;color:var(--muted);white-space:nowrap">' + placeCount + ' lugares · ' + questCount + ' misiones</span>' +
-          '<button class="btn-del region-del" title="Eliminar región">×</button>' +
-          '<span class="region-chevron' + (region.open ? ' open' : '') + '">▶</span>' +
+      div.innerHTML = '<div class="region-header' + (region.open ? ' open' : '') + '" data-ri="' + index + '">' +
+        '<span class="region-num">REGION ' + (index + 1) + '</span>' +
+        '<div style="flex:1;min-width:0">' +
+          '<input class="region-name-f" value="' + esc(region.name) + '" placeholder="Nombre de la region...">' +
+          '<input class="region-desc-f" value="' + esc(region.desc || '') + '" placeholder="Descripcion breve...">' +
         '</div>' +
-        '<div class="region-body' + (region.open ? ' open' : '') + '">' +
-          '<div style="padding:10px 0">' +
-            '<button class="btn-add btn-add-place" data-ri="' + index + '">+ Añadir Lugar</button>' +
-          '</div>' +
-          '<div class="places-container" data-ri="' + index + '"></div>' +
-        '</div>';
+        '<span style="font-family:Cinzel,serif;font-size:.6em;color:var(--muted);white-space:nowrap">' + placeCount + ' lugares · ' + questCount + ' misiones</span>' +
+        '<button class="btn-del region-del" title="Eliminar region">×</button>' +
+        '<span class="region-chevron' + (region.open ? ' open' : '') + '">▶</span>' +
+      '</div>' +
+      '<div class="region-body' + (region.open ? ' open' : '') + '">' +
+        '<div style="padding:10px 0">' +
+          '<button class="btn-add btn-add-place" data-ri="' + index + '">+ Anadir Lugar</button>' +
+        '</div>' +
+        '<div class="places-container" data-ri="' + index + '"></div>' +
+      '</div>';
       
-      // Toggle header
-      const header = div.querySelector('.region-header');
+      var header = div.querySelector('.region-header');
       header.addEventListener('click', function(e){
         if(e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
         region.open = !region.open;
@@ -550,26 +497,23 @@ function renderRegions(){
         renderRegions();
       });
       
-      // Name edit
-      const nameInput = div.querySelector('.region-name-f');
+      var nameInput = div.querySelector('.region-name-f');
       nameInput.addEventListener('input', debounce(function(){
         region.name = nameInput.value;
         saveD();
       }, 300));
       
-      // Desc edit
-      const descInput = div.querySelector('.region-desc-f');
+      var descInput = div.querySelector('.region-desc-f');
       descInput.addEventListener('input', debounce(function(){
         region.desc = descInput.value;
         saveD();
       }, 300));
       
-      // Delete button
-      const delBtn = div.querySelector('.region-del');
+      var delBtn = div.querySelector('.region-del');
       delBtn.onclick = function(e){
         e.preventDefault();
         e.stopPropagation();
-        if(confirm('¿Eliminar la región "' + region.name + '" y todo su contenido?')){
+        if(confirm('Eliminar la region "' + region.name '" y todo su contenido?')){
           DATA.regions.splice(index, 1);
           saveD();
           renderRegions();
@@ -577,8 +521,7 @@ function renderRegions(){
         }
       };
       
-      // Add place button
-      const addPlaceBtn = div.querySelector('.btn-add-place');
+      var addPlaceBtn = div.querySelector('.btn-add-place');
       addPlaceBtn.onclick = function(e){
         e.preventDefault();
         e.stopPropagation();
@@ -586,10 +529,7 @@ function renderRegions(){
       };
       
       c.appendChild(div);
-      
-      // Render places inside
-      const placesContainer = div.querySelector('.places-container');
-      renderPlaces(placesContainer, index);
+      renderPlaces(div.querySelector('.places-container'), index);
       
     })(DATA.regions[ri], ri);
   }
@@ -597,38 +537,34 @@ function renderRegions(){
   updateStats();
 }
 
-// ══════════════════════════════
 // RENDER PLACES
-// ══════════════════════════════
 function renderPlaces(container, ri){
-  const region = DATA.regions[ri];
+  var region = DATA.regions[ri];
   if(!region.places) region.places = [];
   
   container.innerHTML = '';
   
-  for(let pi = 0; pi < region.places.length; pi++){
+  for(var pi = 0; pi < region.places.length; pi++){
     (function(place, placeIndex){
-      const div = document.createElement('div');
+      var div = document.createElement('div');
       div.className = 'place-card';
       
-      const qCount = (place.quests) ? place.quests.length : 0;
+      var qCount = (place.quests) ? place.quests.length : 0;
       
-      div.innerHTML =
-        '<div class="place-header' + (place.open ? ' open' : '') + '" data-pi="' + placeIndex + '">' +
-          '<span class="place-icon">' + esc(place.icon || '📍') + '</span>' +
-          '<input class="place-name-f" value="' + esc(place.name) + '" placeholder="Nombre del lugar...">' +
-          '<span style="font-family:Cinzel,serif;font-size:.55em;color:var(--muted)">' + qCount + ' misiones</span>' +
-          '<button class="btn-del place-del" title="Eliminar lugar">×</button>' +
-          '<span class="place-chevron' + (place.open ? ' open' : '') + '">▶</span>' +
+      div.innerHTML = '<div class="place-header' + (place.open ? ' open' : '') + '" data-pi="' + placeIndex + '">' +
+        '<span class="place-icon">' + esc(place.icon || '📍') + '</span>' +
+        '<input class="place-name-f" value="' + esc(place.name) + '" placeholder="Nombre del lugar...">' +
+        '<span style="font-family:Cinzel,serif;font-size:.55em;color:var(--muted)">' + qCount + ' misiones</span>' +
+        '<button class="btn-del place-del" title="Eliminar lugar">×</button>' +
+        '<span class="place-chevron' + (place.open ? ' open' : '') + '">▶</span>' +
+      '</div>' +
+      '<div class="place-body' + (place.open ? ' open' : '') + '">' +
+        '<div style="padding:8px 0">' +
+          '<button class="btn-add btn-add-quest" data-ri="' + ri + '" data-pi="' + placeIndex + '">+ Nueva Mision</button>' +
         '</div>' +
-        '<div class="place-body' + (place.open ? ' open' : '') + '">' +
-          '<div style="padding:8px 0">' +
-            '<button class="btn-add btn-add-quest" data-ri="' + ri + '" data-pi="' + placeIndex + '">+ Nueva Misión</button>' +
-          '</div>' +
-          '<div class="quests-container" data-pi="' + placeIndex + '"></div>' +
-        '</div>';
+        '<div class="quests-container" data-pi="' + placeIndex + '"></div>' +
+      '</div>';
       
-      // Toggle
       div.querySelector('.place-header').addEventListener('click', function(e){
         if(e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
         place.open = !place.open;
@@ -636,18 +572,16 @@ function renderPlaces(container, ri){
         renderRegions();
       });
       
-      // Name edit
       div.querySelector('.place-name-f').addEventListener('input', debounce(function(){
         place.name = this.value;
         saveD();
         updateStats();
       }, 300));
       
-      // Delete
       div.querySelector('.place-del').onclick = function(e){
         e.preventDefault();
         e.stopPropagation();
-        if(confirm('¿Eliminar "' + place.name + '" y todas sus misiones?')){
+        if(confirm('Eliminar "' + place.name '" y todas sus misiones?')){
           region.places.splice(placeIndex, 1);
           saveD();
           renderRegions();
@@ -655,7 +589,6 @@ function renderPlaces(container, ri){
         }
       };
       
-      // Add quest
       div.querySelector('.btn-add-quest').onclick = function(e){
         e.preventDefault();
         e.stopPropagation();
@@ -663,98 +596,59 @@ function renderPlaces(container, ri){
       };
       
       container.appendChild(div);
-      
-      // Render quests
       renderQuests(div.querySelector('.quests-container'), ri, placeIndex);
       
     })(region.places[pi], pi);
   }
 }
 
-// ══════════════════════════════
 // RENDER QUESTS
-// ══════════════════════════════
 function renderQuests(container, ri, pi){
-  const place = DATA.regions[ri].places[pi];
+  var place = DATA.regions[ri].places[pi];
   if(!place.quests) place.quests = [];
   
   container.innerHTML = '';
   
-  for(let qi = 0; qi < place.quests.length; qi++){
+  for(var qi = 0; qi < place.quests.length; qi++){
     (function(quest, questIndex){
-      const div = document.createElement('div');
+      var div = document.createElement('div');
       div.className = 'quest-card';
       
-      const tasks = quest.tasks || [];
-      let doneCount = 0;
-      for(let t = 0; t < tasks.length; t++){
+      var tasks = quest.tasks || [];
+      var doneCount = 0;
+      for(var t = 0; t < tasks.length; t++){
         if(tasks[t].done) doneCount++;
       }
       
-      let html = 
-        '<div class="quest-head">' +
-          '<input class="quest-title-f" value="' + esc(quest.title) + '" placeholder="Título de la misión...">' +
-          '<button class="btn-del quest-del" title="Eliminar misión">×</button>' +
-        '</div>' +
-        buildPills(quest) +
-        '<div class="quest-meta">' +
-          '<div class="quest-meta-item">' +
-            '<label>Nivel</label>' +
-            '<input class="quest-meta-input q-level" value="' + esc(quest.level || '') + '" placeholder="Ej: 1-3">' +
-          '</div>' +
-          '<div class="quest-meta-item">' +
-            '<label>Facción / NPC</label>' +
-            '<input class="quest-meta-input q-npc" value="' + esc(quest.npc || '') + '" placeholder="Quién da la misión">' +
-          '</div>' +
-          '<div class="quest-meta-item">' +
-            '<label>Oro</label>' +
-            '<input class="quest-meta-input q-gold" value="' + esc(quest.gold || '') + '" placeholder="Recompensa gp">' +
-          '</div>' +
-        '</div>' +
-        '<div class="quest-field">' +
-          '<label>Hook / Introducción</label>' +
-          '<textarea class="quest-input q-hook" placeholder="Cómo se presenta la misión...">' + esc(quest.hook || '') + '</textarea>' +
-        '</div>' +
-        '<div class="quest-field">' +
-          '<label>Desarrollo</label>' +
-          '<textarea class="quest-input q-dev" placeholder="Qué ocurre durante la misión...">' + esc(quest.dev || '') + '</textarea>' +
-        '</div>' +
-        '<div class="quest-section">' +
-          '<h4>✓ Tareas / Objetivos (' + doneCount + '/' + tasks.length + ')</h4>' +
-          '<div class="task-list task-list-' + questIndex + '"></div>' +
-          '<button class="btn-small add-task-btn" style="margin-top:6px">+ Añadir tarea</button>' +
-        '</div>' +
-        '<div class="quest-section">' +
-          '<h4>⚡ Variaciones</h4>' +
-          '<div class="variations-list var-list-' + questIndex + '"></div>' +
-          '<button class="btn-small add-var-btn" style="margin-top:6px">+ Añadir variación</button>' +
-        '</div>' +
-        '<div class="reward-box">' +
-          '<h4>💰 Recompensas</h4>' +
-          '<textarea class="quest-input q-reward" placeholder="Oro, objetos, información...">' + esc(quest.reward || '') + '</textarea>' +
-        '</div>' +
-        '<div class="quest-section">' +
-          '<h4>📋 Consecuencias</h4>' +
-          '<textarea class="quest-input q-conseq" placeholder="Qué pasa si se completa o se ignora...">' + esc(quest.conseq || '') + '</textarea>' +
-        '</div>' +
-        '<div class="gm-notes">' +
-          '<h4>🔒 Notas del DM</h4>' +
-          '<textarea class="quest-input q-gm" placeholder="Información solo para el Dungeon Master...">' + esc(quest.gm || '') + '</textarea>' +
-        '</div>';
+      var html = '<div class="quest-head">' +
+        '<input class="quest-title-f" value="' + esc(quest.title) + '" placeholder="Titulo de la mision...">' +
+        '<button class="btn-del quest-del" title="Eliminar mision">×</button>' +
+      '</div>' +
+      buildPills(quest) +
+      '<div class="quest-meta">' +
+        '<div class="quest-meta-item"><label>Nivel</label><input class="quest-meta-input q-level" value="' + esc(quest.level || '') + '" placeholder="Ej: 1-3"></div>' +
+        '<div class="quest-meta-item"><label>Faccion / NPC</label><input class="quest-meta-input q-npc" value="' + esc(quest.npc || '') + '" placeholder="Quien da la mision"></div>' +
+        '<div class="quest-meta-item"><label>Oro</label><input class="quest-meta-input q-gold" value="' + esc(quest.gold || '') + '" placeholder="Recompensa gp"></div>' +
+      '</div>' +
+      '<div class="quest-field"><label>Hook / Introduccion</label><textarea class="quest-input q-hook" placeholder="Como se presenta la mision...">' + esc(quest.hook || '') + '</textarea></div>' +
+      '<div class="quest-field"><label>Desarrollo</label><textarea class="quest-input q-dev" placeholder="Que ocurre durante la mision...">' + esc(quest.dev || '') + '</textarea></div>' +
+      '<div class="quest-section"><h4>Tareas / Objetivos (' + doneCount + '/' + tasks.length + ')</h4><div class="task-list task-list-' + questIndex + '"></div><button class="btn-small add-task-btn" style="margin-top:6px">+ Anadir tarea</button></div>' +
+      '<div class="quest-section"><h4>Variaciones</h4><div class="variations-list var-list-' + questIndex + '"></div><button class="btn-small add-var-btn" style="margin-top:6px">+ Anadir variacion</button></div>' +
+      '<div class="reward-box"><h4>Recompensas</h4><textarea class="quest-input q-reward" placeholder="Oro, objetos, informacion...">' + esc(quest.reward || '') + '</textarea></div>' +
+      '<div class="quest-section"><h4>Consecuencias</h4><textarea class="quest-input q-conseq" placeholder="Que pasa si se completa o se ignora...">' + esc(quest.conseq || '') + '</textarea></div>' +
+      '<div class="gm-notes"><h4>Notas del DM</h4><textarea class="quest-input q-gm" placeholder="Informacion solo para el Dungeon Master...">' + esc(quest.gm || '') + '</textarea></div>';
       
       div.innerHTML = html;
       
-      // Title
       div.querySelector('.quest-title-f').addEventListener('input', debounce(function(){
         quest.title = this.value;
         saveD();
       }, 300));
       
-      // Delete
       div.querySelector('.quest-del').onclick = function(e){
         e.preventDefault();
         e.stopPropagation();
-        if(confirm('¿Eliminar "' + quest.title + '"?')){
+        if(confirm('Eliminar "' + quest.title + '"?')){
           place.quests.splice(questIndex, 1);
           saveD();
           renderRegions();
@@ -762,44 +656,47 @@ function renderQuests(container, ri, pi){
         }
       };
       
-      // Pills
       attachPills(div, quest, function(){ renderRegions(); });
       
-      // Meta fields
-      ['level','npc','gold'].forEach(function(f){
-        const el = div.querySelector('.q-' + f);
-        if(el){
-          el.addEventListener('input', debounce(function(){
-            quest[f] = el.value;
-            saveD();
-          }, 300));
-        }
-      });
+      var metaFields = ['level','npc','gold'];
+      for(var mf = 0; mf < metaFields.length; mf++){
+        (function(f){
+          var el = div.querySelector('.q-' + f);
+          if(el){
+            el.addEventListener('input', debounce(function(){
+              quest[f] = el.value;
+              saveD();
+            }, 300));
+          }
+        })(metaFields[mf]);
+      }
       
-      // Text areas
-      ['hook','dev','reward','conseq','gm'].forEach(function(f){
-        const el = div.querySelector('.q-' + f);
-        if(el){
-          ar(el);
-          el.addEventListener('input', function(){
-            quest[f] = el.value;
+      var textFields = ['hook','dev','reward','conseq','gm'];
+      for(var tf = 0; tf < textFields.length; tf++){
+        (function(f){
+          var el = div.querySelector('.q-' + f);
+          if(el){
             ar(el);
-            saveD();
-          });
-        }
-      });
+            el.addEventListener('input', function(){
+              quest[f] = el.value;
+              ar(el);
+              saveD();
+            });
+          }
+        })(textFields[tf]);
+      }
       
       // Tasks
-      const taskList = div.querySelector('.task-list-' + questIndex);
+      var taskList = div.querySelector('.task-list-' + questIndex);
       if(taskList && quest.tasks){
-        for(let ti = 0; ti < quest.tasks.length; ti++){
+        for(var ti = 0; ti < quest.tasks.length; ti++){
           (function(t, taskIdx){
             renderTask(taskList, t, taskIdx, quest, function(){ renderRegions(); });
           })(quest.tasks[ti], ti);
         }
       }
       
-      const addTaskBtn = div.querySelector('.add-task-btn');
+      var addTaskBtn = div.querySelector('.add-task-btn');
       if(addTaskBtn){
         addTaskBtn.onclick = function(e){
           e.preventDefault();
@@ -811,21 +708,21 @@ function renderQuests(container, ri, pi){
       }
       
       // Variations
-      const varList = div.querySelector('.var-list-' + questIndex);
+      var varList = div.querySelector('.var-list-' + questIndex);
       if(varList && quest.variations){
-        for(let vi = 0; vi < quest.variations.length; vi++){
+        for(var vi = 0; vi < quest.variations.length; vi++){
           (function(v, varIdx){
             renderVariation(varList, v, varIdx, quest, function(){ renderRegions(); });
           })(quest.variations[vi], vi);
         }
       }
       
-      const addVarBtn = div.querySelector('.add-var-btn');
+      var addVarBtn = div.querySelector('.add-var-btn');
       if(addVarBtn){
         addVarBtn.onclick = function(e){
           e.preventDefault();
           if(!quest.variations) quest.variations = [];
-          quest.variations.push({id:uid(), label:'Variación', content:''});
+          quest.variations.push({id:uid(), label:'Variacion', content:''});
           saveD();
           renderRegions();
         };
@@ -838,10 +735,9 @@ function renderQuests(container, ri, pi){
 }
 
 function renderTask(container, task, ti, quest, renderFn){
-  const div = document.createElement('div');
+  var div = document.createElement('div');
   div.className = 'task-item';
-  div.innerHTML =
-    '<div class="task-cb' + (task.done ? ' done' : '') + '">' + (task.done ? '✓' : '') + '</div>' +
+  div.innerHTML = '<div class="task-cb' + (task.done ? ' done' : '') + '">' + (task.done ? '✓' : '') + '</div>' +
     '<input class="task-text' + (task.done ? ' done' : '') + '" value="' + esc(task.text) + '" placeholder="Objetivo...">' +
     '<button class="btn-del task-del" style="font-size:.85em">×</button>';
   
@@ -870,15 +766,15 @@ function renderTask(container, task, ti, quest, renderFn){
 }
 
 function renderVariation(container, varItem, vi, quest, renderFn){
-  const div = document.createElement('div');
+  var div = document.createElement('div');
   div.className = 'variation-item';
-  div.innerHTML =
-    '<label>Variación ' + String.fromCharCode(65 + vi) + '</label>' +
+  var labelTxt = 'Variacion ' + String.fromCharCode(65 + vi);
+  div.innerHTML = '<label>' + labelTxt + '</label>' +
     '<div style="display:flex;gap:6px;margin-bottom:4px">' +
       '<input class="quest-meta-input var-label" value="' + esc(varItem.label || '') + '" placeholder="Nombre/tipo..." style="flex:1">' +
       '<button class="btn-del var-del">×</button>' +
     '</div>' +
-    '<textarea class="quest-input var-content" placeholder="Descripción de esta variación...">' + esc(varItem.content || '') + '</textarea>';
+    '<textarea class="quest-input var-content" placeholder="Descripcion de esta variacion...">' + esc(varItem.content || '') + '</textarea>';
   
   div.querySelector('.var-label').addEventListener('input', debounce(function(){
     quest.variations[vi].label = this.value;
@@ -902,21 +798,17 @@ function renderVariation(container, varItem, vi, quest, renderFn){
   container.appendChild(div);
 }
 
-// ══════════════════════════════
-// MODALS FOR CREATION
-// ══════════════════════════════
-
-// New Region
+// NEW REGION
 document.getElementById('btn-add-region').addEventListener('click', function(){
   openModal(
-    '<div class="modal-title">Nueva Región</div>' +
-    '<label>Nombre de la Región</label>' +
-    '<input id="mn" placeholder="Ej: Valle de Dessarin, Phandalin, Camino de Triboar...">' +
-    '<label>Descripción (opcional)</label>' +
-    '<textarea id="md" placeholder="Contexto general de esta región..."></textarea>',
+    '<div class="modal-title">Nueva Region</div>' +
+    '<label>Nombre de la Region</label>' +
+    '<input id="mn" placeholder="Ej: Valle de Dessarin, Phandalin...">' +
+    '<label>Descripcion (opcional)</label>' +
+    '<textarea id="md" placeholder="Contexto general..."></textarea>',
     function(){
-      const name = gv('mn') || 'Nueva Región';
-      const desc = gv('md');
+      var name = gv('mn') || 'Nueva Region';
+      var desc = gv('md');
       DATA.regions.push({
         id: uid(),
         name: name,
@@ -936,9 +828,9 @@ function openPlaceModal(ri){
     '<label>Icono (emoji)</label>' +
     '<input id="mi" value="📍" style="font-size:1.4em;width:80px">' +
     '<label>Nombre del Lugar</label>' +
-    '<input id="mn" placeholder="Ej: Posada Stonehill, Vado de Cony, Red Larch...">' +
-    '<label>Descripción corta (opcional)</label>' +
-    '<textarea id="md" placeholder="Qué es este lugar..."></textarea>',
+    '<input id="mn" placeholder="Ej: Posada Stonehill, Red Larch...">' +
+    '<label>Descripcion corta (opcional)</label>' +
+    '<textarea id="md" placeholder="Que es este lugar..."></textarea>',
     function(){
       if(!DATA.regions[ri].places) DATA.regions[ri].places = [];
       DATA.regions[ri].places.push({
@@ -957,21 +849,21 @@ function openPlaceModal(ri){
 
 function openQuestModal(ri, pi){
   openModal(
-    '<div class="modal-title">Nueva Misión Dinámica</div>' +
-    '<label>Título de la Misión</label>' +
-    '<input id="mt" placeholder="Ej: El Carretero que No Llegó...">' +
+    '<div class="modal-title">Nueva Mision Dinamica</div>' +
+    '<label>Titulo de la Mision</label>' +
+    '<input id="mt" placeholder="Ej: El Carretero que No Llego...">' +
     '<label>Nivel Recomendado</label>' +
     '<input id="ml" placeholder="Ej: 1-3, 3-5, 5-7">' +
-    '<label>Facción / NPC</label>' +
-    '<input id="mnpc" placeholder="Quién ofrece la misión">' +
-    '<label>Hook (Introducción)</label>' +
-    '<textarea id="mh" placeholder="Cómo se presenta la misión a los jugadores..."></textarea>',
+    '<label>Faccion / NPC</label>' +
+    '<input id="mnpc" placeholder="Quien ofrece la mision">' +
+    '<label>Hook (Introduccion)</label>' +
+    '<textarea id="mh" placeholder="Como se presenta la mision a los jugadores..."></textarea>',
     function(){
-      const place = DATA.regions[ri].places[pi];
+      var place = DATA.regions[ri].places[pi];
       if(!place.quests) place.quests = [];
       place.quests.push({
         id: uid(),
-        title: gv('mt') || 'Nueva Misión',
+        title: gv('mt') || 'Nueva Mision',
         level: gv('ml'),
         npc: gv('mnpc'),
         hook: gv('mh'),
@@ -989,139 +881,139 @@ function openQuestModal(ri, pi){
   );
 }
 
-// ══════════════════════════════
 // SEED DATA
-// ══════════════════════════════
 function seedIfEmpty(){
   if(DATA.regions.length > 0) return;
   
   console.log('Seeding initial data...');
   
-  DATA.regions = [
-    {
-      id: uid(),
-      name: 'Valle de Dessarin',
-      desc: 'Zona central del conflicto elemental. Red Larch como hub logístico.',
-      open: true,
-      places: [
-        {
-          id: uid(), icon: '🏘️', name: 'Red Larch', desc: 'Pueblo comercial, fachada del Canoso.',
-          open: true,
-          quests: [
-            {
-              id: uid(), title: 'Los Nettlebee Tienen un Problema', level: '2-4', npc: 'Wiggan Nettlebee',
-              hook: 'Wiggan Nettlebee llega al pueblo con expresion preocupada. Sus pastos al norte han empezado a morir desde adentro. Ha perdido seis vacas en dos semanas.',
-              dev: 'Los pastos muertos forman un semicirculo irregular. Naturaleza CD 13: la muerte viene de abajo. Investigacion CD 14: patron de grietas que converge hacia un punto central.',
-              status: 'disponible',
-              variations: [
-                {id: uid(), label: 'Simple', content: 'La piedra fue plantada por un agente sin que Wiggan lo supiera.'},
-                {id: uid(), label: 'Con capas', content: 'Wiggan sabe mas de lo que dice.'},
-                {id: uid(), label: 'Urgente', content: 'La piedra no esta sola. Hay tres mas.'}
-              ],
-              reward: '8 po de Wiggan mas una semana de alojamiento.',
-              conseq: 'Si completa: pastos recuperados. Si ignora: terreno convertido en punto de acceso subterraneo.',
-              gm: 'Wiggan es miembro menor del Culto de la Tierra Aplastante, encubierto.'
-            },
-            {
-              id: uid(), title: 'La Melodia que no Deberia Existir', level: '2-3', npc: 'Dusk (bardo)',
-              hook: 'Un bardo llamado Dusk lleva dos noches tocando en la taberna. Una cancion causa pesadillas.',
-              dev: 'Arcana CD 12: contiene frecuencia elemental baja. Dusk aprendio la pieza de un musico en Triboar.',
-              status: 'disponible',
-              variations: [
-                {id: uid(), label: 'Neutra', content: 'Musica sin instrucciones codificadas.'},
-                {id: uid(), label: 'Con red', content: 'Contiene instrucciones codificadas para agentes.'}
-              ],
-              reward: 'Descuento en alojamiento. Info sobre Culto del Aire.',
-              conseq: 'Si completa: Dusk como fuente de info. Si ignora: sin impacto principal.'
-            }
-          ]
-        },
-        {
-          id: uid(), icon: '⛪', name: 'Monasterio de la Piedra Sagrada', desc: 'Fachada del Culto de la Tierra.',
-          open: false,
-          quests: [
-            {
-              id: uid(), title: 'El Prisionero Olvidado', level: '5-7', npc: 'Braelen Hatherhand',
-              hook: 'Un historiador enano llamado Braelen no fue enviado a las minas. Hellenrae lo mantiene separado por sus manuscritos.',
-              dev: 'Braelen esta en celda restringida. Sus manuscritos describen entrada secundaria a Tyar-Besil.',
-              status: 'disponible',
-              variations: [
-                {id: uid(), label: 'Directa', content: 'Rescatan a Braelen antes de que el culto consiga lo que quiere.'},
-                {id: uid(), label: 'Tragica', content: 'Braelen muere horas antes de llegar.'}
-              ],
-              reward: 'Acceso permanente a historia de Besilmer. Ventaja tactica.',
-              gm: 'Braelen puede identificar objetos magicos con origen en antiguo reino enano.'
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: uid(),
-      name: 'Phandalin y Alrededores',
-      desc: 'Zona inicial. Presencia Redbrand.',
-      open: true,
-      places: [
-        {
-          id: uid(), icon: '🏠', name: 'Phandalin - Pueblo', desc: 'Bajo influencia Redbrand.',
-          open: true,
-          quests: [
-            {
-              id: uid(), title: 'La Queja del Herrera', level: '1-2', npc: 'Grista Ironmantle',
-              hook: 'La herrera Grista tiene un problema: alguien le roba hierro en bruto del almacen trasero durante el dia.',
-              dev: 'Tres adolescentes del pueblo llevan el hierro a punto de entrega. No son ladrones voluntarios.',
-              status: 'disponible',
-              variations: [
-                {id: uid(), label: 'Simple', content: 'Adolescentes oportunistas.'},
-                {id: uid(), label: 'Con capas', content: 'Hierro destinado a Culto de la Tierra.'}
-              ],
-              reward: '2 po mas objeto menor fabricado a medida.',
-              gm: 'Conexion potencial con Suministros Delder en Red Larch.'
-            },
-            {
-              id: uid(), title: 'Correo sin Destinatario', level: '1-2', npc: 'Sildar Hallwinter',
-              hook: 'Sildar recibio carta con nombre alterado. Bajo la raspadura: Iarno Albrek.',
-              dev: 'Carta llego de Triboar. Mensajero vio hombre alto con anillo de arana.',
-              status: 'disponible',
-              variations: [
-                {id: uid(), label: 'Reveladora', content: 'Carta revela que Glasstaff pidio refuerzos para excavar.'}
-              ],
-              reward: 'Confianza de Sildar. Info sobre excavacion bajo mansion.'
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: uid(),
-      name: 'Camino de Triboar',
-      desc: 'Ruta comercial clave.',
-      open: false,
-      places: [
-        {
-          id: uid(), icon: '🛤️', name: 'Camino de Triboar', desc: 'Ruta principal.',
-          open: true,
-          quests: [
-            {
-              id: uid(), title: 'El Carretero que No Llego', level: '1-3', npc: 'Bramble Cardo de Espino',
-              hook: 'Bramble del Vado de Cony espera cargamento desde Triboar hace tres dias. Carretero nunca llego.',
-              dev: 'Carromato abandonado. Carga intacta. Huellas de arrastre hacia bosque.',
-              status: 'disponible',
-              reward: '4 po. Pista hacia red logistica Culto Tierra.'
-            }
-          ]
-        }
-      ]
-    }
-  ];
+  var r1_places = [];
+  var r1_p1_quests = [];
+  var r1_p1_vars = [];
+  var r1_p1_tasks = [];
+  
+  r1_p1_vars.push({id:uid(), label:'Simple', content:'La piedra fue plantada por un agente sin que Wiggan lo supiera.'});
+  r1_p1_vars.push({id:uid(), label:'Con capas', content:'Wiggan sabe mas de lo que dice sobre el origen.'});
+  r1_p1_vars.push({id:uid(), label:'Urgente', content:'La piedra no esta sola. Hay tres mas en los pastos.'});
+  
+  r1_p1_quests.push({
+    id: uid(),
+    title: 'Los Nettlebee Tienen un Problema',
+    level: '2-4',
+    npc: 'Wiggan Nettlebee',
+    hook: 'Wiggan Nettlebee llega al pueblo con expresion preocupada. Sus pastos al norte han empezado a morir desde adentro.',
+    dev: 'Los pastos muertos forman un semicirculo irregular. Naturaleza CD 13: la muerte viene de abajo.',
+    status: 'disponible',
+    variations: r1_p1_vars,
+    reward: '8 po de Wiggan mas alojamiento.',
+    conseq: 'Si completa: pastos recuperados. Si ignora: terreno convertido en punto de acceso.',
+    gm: 'Wiggan es miembro menor del Culto de la Tierra.'
+  });
+  
+  var r1_p2_quests = [];
+  var r1_p2_vars = [];
+  r1_p2_vars.push({id:uid(), label:'Neutra', content:'Musica sin instrucciones codificadas.'});
+  r1_p2_vars.push({id:uid(), label:'Con red', content:'Contiene instrucciones codificadas.'});
+  
+  r1_p2_quests.push({
+    id: uid(),
+    title: 'La Melodia que no Deberia Existir',
+    level: '2-3',
+    npc: 'Dusk (bardo)',
+    hook: 'Un bardo llamado Dusk lleva dos noches tocando en la taberna. Una cancion causa pesadillas.',
+    dev: 'Arcana CD 12: contiene frecuencia elemental baja.',
+    status: 'disponible',
+    variations: r1_p2_vars,
+    reward: 'Descuento en alojamiento.',
+    conseq: 'Si completa: Dusk como fuente de info.'
+  });
+  
+  r1_places.push({
+    id: uid(), icon: '🏘️', name: 'Red Larch', desc: 'Pueblo comercial.', open: true, quests: r1_p1_quests
+  });
+  
+  var r1_p3_quests = [];
+  r1_p3_quests.push({
+    id: uid(),
+    title: 'El Prisionero Olvidado',
+    level: '5-7',
+    npc: 'Braelen Hatherhand',
+    hook: 'Un historiador enano llamado Braelen no fue enviado a las minas.',
+    dev: 'Braelen esta en celda restringida. Sus manuscritos describen entrada secundaria.',
+    status: 'disponible',
+    variations: [],
+    reward: 'Acceso a historia de Besilmer.'
+  });
+  
+  r1_places.push({
+    id: uid(), icon: '⛪', name: 'Monasterio Piedra Sagrada', desc: 'Fachada del Culto.', open: false, quests: r1_p3_quests
+  });
+  
+  var r2_places = [];
+  var r2_p1_quests = [];
+  r2_p1_quests.push({
+    id: uid(),
+    title: 'La Queja del Herrera',
+    level: '1-2',
+    npc: 'Grista Ironmantle',
+    hook: 'La herrera Grista tiene un problema: alguien le roba hierro en bruto durante el dia.',
+    dev: 'Tres adolescentes del pueblo llevan el hierro a punto de entrega.',
+    status: 'disponible',
+    variations: [],
+    reward: '2 po mas objeto menor.'
+  });
+  
+  r2_places.push({
+    id: uid(), icon: '🏠', name: 'Phandalin', desc: 'Bajo influencia Redbrand.', open: true, quests: r2_p1_quests
+  });
+  
+  var r3_places = [];
+  var r3_p1_quests = [];
+  r3_p1_quests.push({
+    id: uid(),
+    title: 'El Carretero que No Llego',
+    level: '1-3',
+    npc: 'Bramble Cardo de Espino',
+    hook: 'Bramble del Vado de Cony espera cargamento desde Triboar hace tres dias.',
+    dev: 'Carromato abandonado. Carga intacta.',
+    status: 'disponible',
+    variations: [],
+    reward: '4 po.'
+  });
+  
+  r3_places.push({
+    id: uid(), icon: '🛤️', name: 'Camino de Triboar', desc: 'Ruta principal.', open: true, quests: r3_p1_quests
+  });
+  
+  DATA.regions.push({
+    id: uid(),
+    name: 'Valle de Dessarin',
+    desc: 'Zona central del conflicto elemental.',
+    open: true,
+    places: r1_places
+  });
+  
+  DATA.regions.push({
+    id: uid(),
+    name: 'Phandalin y Alrededores',
+    desc: 'Zona inicial.',
+    open: true,
+    places: r2_places
+  });
+  
+  DATA.regions.push({
+    id: uid(),
+    name: 'Camino de Triboar',
+    desc: 'Ruta comercial clave.',
+    open: false,
+    places: r3_places
+  });
   
   saveD();
   console.log('Seed complete. Regions:', DATA.regions.length);
 }
 
-// ══════════════════════════════
 // INIT
-// ══════════════════════════════
 console.log('Initializing...');
 loadD();
 seedIfEmpty();
