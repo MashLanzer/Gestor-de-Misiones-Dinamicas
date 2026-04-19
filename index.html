@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecos del Apocalipsis — Misiones Dinámicas</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+:root {
+  --bg:      #06080d;
+  --bg2:     #090c12;
+  --bg3:     #0d1018;
+  --border:  #1e2535;
+  --border2: #2a3348;
+  --text:    #c8cedd;
+  --dim:     #6a7590;
+  --muted:   #3a4255;
+  --gold:    #b8922a;
+  --gold-l:  #d4aa44;
+  --gold-p:  #e8cc88;
+  --red:     #cc3333;
+  --blue-l:  #3a6aaa;
+  --purple-l:#7a44cc;
+  --amber-l: #cc8822;
+  --green-l: #44aa66;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'EB Garamond',Georgia,serif;
+  font-size:16px;line-height:1.7;min-height:100vh;
+}
+
+body::before{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 15%,rgba(139,26,26,.05) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 80% at 85% 85%,rgba(58,26,106,.05) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+
+/* ── HEADER ── */
+.site-header{position:relative;z-index:1;padding:44px 44px 28px;border-bottom:1px solid var(--border2)}
+.eyebrow{font-family:'Cinzel',serif;font-size:.65em;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.site-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.2em,3vw,1.9em);color:#e8dcc8;font-weight:700;line-height:1.15;margin-bottom:6px;text-shadow:0 0 40px rgba(184,146,42,.18)}
+.site-sub{font-style:italic;color:var(--dim);font-size:.9em}
+
+/* ── MAIN ── */
+.main{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:32px 44px 80px}
+
+/* ── SECTION HEAD ── */
+.sec-head{display:flex;align-items:center;gap:12px;padding-bottom:10px;margin-bottom:24px;border-bottom:1px solid var(--border2)}
+.sec-label{font-family:'Cinzel',serif;font-size:.75em;letter-spacing:2px;text-transform:uppercase;flex:1}
+.sec-label.gold{color:var(--gold-l)}
+
+/* ── BUTTONS ── */
+.btn-add{font-family:'Cinzel',serif;font-size:.62em;letter-spacing:1px;padding:6px 16px;border-radius:4px;cursor:pointer;border:1px solid var(--border2);background:transparent;color:var(--dim);transition:all .2s;white-space:nowrap;display:inline-flex;align-items:center;gap:4px}
+.btn-add:hover{border-color:var(--gold);color:var(--gold-p);background:rgba(184,146,42,.05)}
+.btn-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.1em;padding:2px 6px;border-radius:3px;transition:color .15s;line-height:1;flex-shrink:0}
+.btn-del:hover{color:var(--red)}
+.btn-small{font-family:'Cinzel',serif;font-size:.58em;letter-spacing:.5px;padding:4px 10px;border-radius:3px;border:1px dashed var(--border2);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
+.btn-small:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── REGION CARD ── */
+.region-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:20px;overflow:hidden;border-left:3px solid var(--gold)}
+
+.region-header{
+  display:flex;align-items:center;gap:12px;
+  padding:18px 22px;cursor:pointer;
+  user-select:none;transition:background .15s;
+  border-bottom:1px solid transparent;
+}
+.region-header:hover{background:var(--bg3)}
+.region-header.open{border-bottom-color:var(--border)}
+.region-num{font-family:'Cinzel',serif;font-size:.75em;color:var(--gold-l);letter-spacing:2px;font-weight:700;white-space:nowrap}
+.region-name-f{
+  font-family:'Cinzel',serif;font-size:1em;font-weight:600;color:#dde0e8;
+  background:transparent;border:none;outline:none;
+  flex:1;cursor:text;padding:4px 8px;
+  border-radius:4px;transition:all .2s;
+  border:1px solid transparent;
+}
+.region-name-f:hover{border-color:var(--border2)}
+.region-name-f:focus{border-color:var(--gold);color:var(--gold-p)}
+.region-desc-f{
+  font-size:.82em;color:var(--dim);font-style:italic;
+  background:transparent;border:none;outline:none;width:100%;
+  padding:2px 8px;border-radius:4px;
+  border:1px solid transparent;transition:all .2s;
+}
+.region-desc-f:hover{border-color:var(--border2)}
+.region-desc-f:focus{border-color:var(--gold);color:var(--text)}
+.region-chevron{color:var(--muted);font-size:.9em;transition:transform .25s;flex-shrink:0}
+.region-chevron.open{transform:rotate(90deg)}
+.region-body{display:none;padding:0 22px 20px}
+.region-body.open{display:block}
+
+/* ── PLACE CARD ── */
+.place-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:8px;margin:10px 0;overflow:hidden;
+}
+.place-header{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 16px;cursor:pointer;user-select:none;
+  transition:background .15s;border-bottom:1px solid transparent;
+}
+.place-header:hover{background:rgba(255,255,255,.02)}
+.place-header.open{border-bottom-color:var(--border)}
+.place-icon{font-size:1.4em;flex-shrink:0}
+.place-name-f{
+  font-family:'Cinzel',serif;font-size:.88em;font-weight:600;color:var(--text);
+  background:transparent;border:none;outline:none;flex:1;
+  cursor:text;padding:3px 6px;border-radius:4px;
+  border:1px solid transparent;transition:all .2s;
+}
+.place-name-f:hover{border-color:var(--border2)}
+.place-name-f:focus{border-color:var(--amber-l);color:var(--amber-l)}
+.place-chevron{color:var(--muted);font-size:.8em;transition:transform .25s;flex-shrink:0}
+.place-chevron.open{transform:rotate(90deg)}
+.place-body{display:none;padding:0 16px 14px}
+.place-body.open{display:block}
+
+/* ── QUEST CARD ── */
+.quest-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:8px;margin:8px 0;padding:16px 18px;
+  position:relative;border-left:2px solid var(--purple-l);
+  transition:border-color .2s;
+}
+.quest-card:hover{border-left-color:var(--purple-l)}
+.quest-head{
+  display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;
+}
+.quest-title-f{
+  font-family:'Cinzel',serif;font-size:.95em;font-weight:600;color:#e0e4f0;
+  background:transparent;border:none;outline:none;flex:1;
+  cursor:text;padding:2px 4px;border-bottom:1px solid transparent;
+  transition:all .2s;
+}
+.quest-title-f:hover{border-bottom-color:var(--border2)}
+.quest-title-f:focus{border-bottom-color:var(--gold-p);color:var(--gold-p)}
+
+/* Quest fields */
+.quest-field{margin:8px 0}
+.quest-field label{
+  font-family:'Cinzel',serif;font-size:.6em;letter-spacing:1.5px;
+  color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px;
+}
+.quest-input{
+  width:100%;background:var(--bg);border:1px solid var(--border);
+  border-radius:6px;color:var(--text);padding:8px 12px;
+  font-family:'EB Garamond',serif;font-size:.9em;
+  outline:none;transition:border-color .2s;resize:vertical;line-height:1.55;
+}
+.quest-input:focus{border-color:var(--gold)}
+.quest-input::placeholder{color:var(--muted);font-style:italic}
+
+/* Quest meta row */
+.quest-meta{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.quest-meta-item{
+  flex:1;min-width:120px;
+}
+.quest-meta-item label{
+  font-family:'Cinzel',serif;font-size:.55em;letter-spacing:1px;
+  color:var(--muted);text-transform:uppercase;display:block;margin-bottom:3px;
+}
+.quest-meta-input{
+  width:100%;background:var(--bg);border:1px solid var(--border);
+  border-radius:4px;color:var(--text);padding:6px 10px;
+  font-family:'EB Garamond',serif;font-size:.82em;outline:none;
+  transition:border-color .2s;
+}
+.quest-meta-input:focus{border-color:var(--gold-l)}
+
+/* Status pills */
+.pills-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:10px 0}
+.pill-lbl{font-family:'Cinzel',serif;font-size:.55em;letter-spacing:1px;color:var(--muted);margin-right:3px}
+.pill{font-family:'Cinzel',serif;font-size:.56em;letter-spacing:.5px;padding:3px 10px;border-radius:12px;border:1px solid var(--border2);background:transparent;color:var(--dim);cursor:pointer;transition:all .15s;white-space:nowrap;user-select:none}
+.pill:hover{border-color:var(--gold-l);color:var(--gold-p)}
+.pill.on{font-weight:700}
+.pill.p-red{background:#3a0808;color:#ee8888;border-color:#6a2020}
+.pill.p-green{background:#062010;color:#66cc88;border-color:#1a5a2a}
+.pill.p-amber{background:#2a1a04;color:#ddaa44;border-color:#6a4a10}
+.pill.p-blue{background:#060e20;color:#6699cc;border-color:#1a3a6a}
+.pill.p-purple{background:#0d0618;color:#aa77ee;border-color:#3a1a6a}
+
+/* Sections inside quest */
+.quest-section{margin:12px 0;padding:12px 14px;background:var(--bg);border-radius:6px;border:1px solid var(--border)}
+.quest-section h4{
+  font-family:'Cinzel',serif;font-size:.72em;letter-spacing:1.5px;
+  color:var(--gold-l);margin-bottom:8px;text-transform:uppercase;
+}
+
+/* Variation items */
+.variation-item{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:5px;padding:10px 12px;margin:6px 0;
+  position:relative;
+}
+.variation-item label{
+  font-family:'Cinzel',serif;font-size:.58em;letter-spacing:1px;
+  color:var(--amber-l);display:block;margin-bottom:4px;
+}
+
+/* Task list */
+.task-list{list-style:none;padding:0}
+.task-item{
+  display:flex;align-items:flex-start;gap:8px;
+  padding:6px 8px;border-radius:4px;margin:3px 0;
+  transition:background .15s;
+}
+.task-item:hover{background:var(--bg3)}
+.task-cb{width:16px;height:16px;border:2px solid var(--border2);border-radius:3px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:9px;cursor:pointer;transition:all .15s}
+.task-cb.done{background:var(--green-l);border-color:var(--green-l);color:#fff}
+.task-text{flex:1;background:transparent;border:none;outline:none;font-family:'EB Garamond',serif;font-size:.88em;color:var(--text);padding:2px 4px;border-bottom:1px solid transparent;cursor:text}
+.task-text:focus{border-bottom-color:var(--gold)}
+.task-text.done{text-decoration:line-through;color:var(--dim)}
+
+/* Reward box */
+.reward-box{
+  background:linear-gradient(135deg,rgba(184,146,42,.08),transparent);
+  border:1px solid rgba(184,146,42,.2);border-radius:6px;
+  padding:12px 14px;margin:10px 0;
+}
+.reward-box h4{color:var(--gold-l);margin-bottom:6px}
+
+/* GM Notes */
+.gm-notes{
+  background:rgba(204,51,51,.05);border:1px solid rgba(204,51,51,.15);
+  border-radius:6px;padding:12px 14px;margin:10px 0;
+}
+.gm-notes h4{color:var(--red);margin-bottom:6px}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:999;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:28px 32px;width:min(560px,94vw);max-height:90vh;overflow-y:auto}
+.modal-title{font-family:'Cinzel',serif;font-size:.95em;color:var(--gold-p);margin-bottom:20px;letter-spacing:1px}
+.modal label{font-family:'Cinzel',serif;font-size:.62em;letter-spacing:1px;color:var(--dim);display:block;margin-bottom:4px;margin-top:12px}
+.modal input,.modal textarea,.modal select{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:6px;color:var(--text);padding:10px 14px;font-family:'EB Garamond',serif;font-size:.92em;outline:none;transition:border-color .2s}
+.modal input:focus,.modal textarea:focus,.modal select:focus{border-color:var(--gold)}
+.modal textarea{resize:vertical;min-height:70px;line-height:1.55}
+.modal select option{background:var(--bg2)}
+.modal-btns{display:flex;gap:12px;justify-content:flex-end;margin-top:20px}
+.btn-ok{font-family:'Cinzel',serif;font-size:.7em;letter-spacing:1px;padding:8px 24px;border-radius:5px;cursor:pointer;background:var(--gold);color:#1a1000;border:none;font-weight:700;transition:opacity .2s}
+.btn-ok:hover{opacity:.85}
+.btn-cancel{font-family:'Cinzel',serif;font-size:.7em;letter-spacing:1px;padding:8px 18px;border-radius:5px;cursor:pointer;background:transparent;color:var(--dim);border:1px solid var(--border2);transition:all .2s}
+.btn-cancel:hover{border-color:var(--red);color:#cc8888}
+
+/* Footer */
+.footer-quote{text-align:center;font-style:italic;color:var(--muted);font-size:.86em;padding:28px 0 6px;border-top:1px solid var(--border);margin-top:40px}
+.footer-quote span{color:var(--gold);font-family:'Cinzel',serif;font-size:1.05em;display:block;margin-top:6px}
+
+/* Stats bar */
+.stats-bar{
+  display:flex;gap:20px;flex-wrap:wrap;
+  padding:14px 20px;background:var(--bg2);
+  border:1px solid var(--border);border-radius:8px;
+  margin-bottom:24px;
+}
+.stat-item{text-align:center}
+.stat-num{font-family:'Cinzel',serif;font-size:1.6em;font-weight:700;color:var(--gold-l)}
+.stat-lbl{font-family:'Cinzel',serif;font-size:.55em;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="eyebrow">Gestor de Contenido Dinámico</div>
+  <div class="site-title">Misiones Dinámicas Diarias</div>
+  <div class="site-sub"><em>Contenido modular opcional. El mundo existe con o sin la intervención de los personajes.</em></div>
+</header>
+
+<div class="main">
+
+  <div class="sec-head">
+    <span class="sec-label gold">📜 Registro de Misiones por Región</span>
+    <button class="btn-add" id="btn-add-region">+ Nueva Región</button>
+  </div>
+
+  <div class="stats-bar" id="stats-bar">
+    <div class="stat-item"><div class="stat-num" id="stat-regions">0</div><div class="stat-lbl">Regiones</div></div>
+    <div class="stat-item"><div class="stat-num" id="stat-places">0</div><div class="stat-lbl">Lugares</div></div>
+    <div class="stat-item"><div class="stat-num" id="stat-quests">0</div><div class="stat-lbl">Misiones</div></div>
+  </div>
+
+  <div id="container-regions"></div>
+
+  <div class="footer-quote">
+    Cada misión puede integrarse o ignorarse de forma independiente.
+    <span>"El mundo continúa siendo un lugar donde las cosas pasan independientemente de los héroes."</span>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal-box"></div>
+</div>
+
+<script>
+// ══════════════════════════════
+// STORAGE
+// ══════════════════════════════
+const KEY = 'ecos_missions_v1';
+let DATA = { regions: [] };
+
+function loadD(){
+  try{ const d = localStorage.getItem(KEY); if(d) DATA = JSON.parse(d); } catch(e){}
+  if(!DATA.regions) DATA.regions = [];
+}
+function saveD(){ try{ localStorage.setItem(KEY, JSON.stringify(DATA)); } catch(e){} }
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function ar(el){ if(!el) return; el.style.height='auto'; el.style.height = el.scrollHeight + 'px'; }
+
+function debounce(fn, ms){ let t; return function(...a){ clearTimeout(t); t = setTimeout(()=>fn(...a), ms); }; }
+
+// ══════════════════════════════
+// MODAL ENGINE
+// ══════════════════════════════
+function openModal(html, onConfirm){
+  const box = document.getElementById('modal-box');
+  box.innerHTML = html + `
+    <div class="modal-btns">
+      <button class="btn-cancel" id="modal-cancel">Cancelar</button>
+      <button class="btn-ok" id="modal-ok">Crear</button>
+    </div>`;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.getElementById('modal-cancel').onclick = closeModal;
+  document.getElementById('modal-ok').onclick = () => { onConfirm(); closeModal(); };
+}
+function closeModal(){ document.getElementById('modal-overlay').classList.remove('open'); }
+document.getElementById('modal-overlay').addEventListener('click', e => { if(e.target === document.getElementById('modal-overlay')) closeModal(); });
+
+function gv(id){ const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+// ══════════════════════════════
+// STATS
+// ══════════════════════════════
+function updateStats(){
+  let places=0, quests=0;
+  DATA.regions.forEach(r => {
+    if(r.places) places += r.places.length;
+    r.places && r.places.forEach(p => { if(p.quests) quests += p.quests.length; });
+  });
+  document.getElementById('stat-regions').textContent = DATA.regions.length;
+  document.getElementById('stat-places').textContent = places;
+  document.getElementById('stat-quests').textContent = quests;
+}
+
+// ══════════════════════════════
+// PILL HELPERS
+// ══════════════════════════════
+const pillMap = {
+  activa:'p-red',disponible:'p-green',completada:'p-green',fallida:'p-red',
+  bloqueada:'p-amber',investigando:'p-blue','en curso':'p-blue',
+  repetible:'p-purple',opcional:'p-purple'
+};
+
+function buildPills(item){
+  const st = item.status || '';
+  let h = `<div class="pills-row"><span class="pill-lbl">ESTADO:</span>`;
+  ['disponible','activa','en curso','completada','fallida','bloqueada','opcional','repetible'].forEach(s => {
+    const on = st===s;
+    const cls = on ? `on ${pillMap[s]||'p-blue'}` : pillMap[s]||'';
+    h += `<span class="pill ${cls}" data-val="${s}">${s}</span>`;
+  });
+  h += '</div>';
+  return h;
+}
+
+function attachPills(container, item, renderFn){
+  container.querySelectorAll('.pill[data-val]').forEach(p => {
+    p.onclick = function(e){
+      e.preventDefault(); e.stopPropagation();
+      const v = this.dataset.val;
+      item.status = item.status===v ? '' : v;
+      saveD(); renderFn();
+    };
+  });
+}
+
+// ══════════════════════════════
+// RENDER REGIONS
+// ══════════════════════════════
+function renderRegions(){
+  const c = document.getElementById('container-regions');
+  c.innerHTML = '';
+  DATA.regions.forEach((region, ri) => {
+    const div = document.createElement('div');
+    div.className = 'region-card';
+    
+    const placeCount = (region.places||[]).length;
+    let questCount = 0;
+    (region.places||[]).forEach(p => { questCount += (p.quests||[]).length; });
+    
+    div.innerHTML = `
+      <div class="region-header" data-ri="${ri}">
+        <span class="region-num">REGIÓN ${ri+1}</span>
+        <div style="flex:1;min-width:0">
+          <input class="region-name-f" value="${esc(region.name)}" placeholder="Nombre de la región...">
+          <input class="region-desc-f" value="${esc(region.desc||'')}" placeholder="Descripción breve de la región...">
+        </div>
+        <span style="font-family:'Cinzel',serif;font-size:.6em;color:var(--muted);white-space:nowrap">${placeCount} lugares · ${questCount} misiones</span>
+        <button class="btn-del region-del" title="Eliminar región">×</button>
+        <span class="region-chevron ${region.open?'open':''}">▶</span>
+      </div>
+      <div class="region-body ${region.open?'open':''}">
+        <div style="padding:10px 0">
+          <button class="btn-add btn-add-place" data-ri="${ri}">+ Añadir Lugar</button>
+        </div>
+        <div class="places-container" data-ri="${ri}"></div>
+      </div>`;
+    
+    // Toggle
+    div.querySelector('.region-header').addEventListener('click', e => {
+      if(e.target.tagName==='INPUT'||e.target.tagName==='BUTTON') return;
+      region.open = !region.open; saveD(); renderRegions();
+    });
+    
+    // Name edit
+    div.querySelector('.region-name-f').addEventListener('input', debounce(() => {
+      region.name = div.querySelector('.region-name-f').value; saveD();
+    },300));
+    div.querySelector('.region-desc-f').addEventListener('input', debounce(() => {
+      region.desc = div.querySelector('.region-desc-f').value; saveD();
+    },300));
+    
+    // Delete region
+    div.querySelector('.region-del').onclick = function(e){
+      e.preventDefault(); e.stopPropagation();
+      if(confirm(`¿Eliminar la región "${region.name}" y todo su contenido?`)){
+        DATA.regions.splice(ri,1); saveD(); renderRegions(); updateStats();
+      }
+    };
+    
+    // Add place button
+    div.querySelector('.btn-add-place').onclick = function(e){
+      e.preventDefault(); e.stopPropagation();
+      openPlaceModal(ri);
+    };
+    
+    c.appendChild(div);
+    
+    // Render places inside
+    renderPlaces(div.querySelector('.places-container'), ri);
+  });
+  
+  updateStats();
+}
+
+// ══════════════════════════════
+// RENDER PLACES
+// ══════════════════════════════
+function renderPlaces(container, ri){
+  const region = DATA.regions[ri];
+  if(!region.places) region.places = [];
+  container.innerHTML = '';
+  
+  region.places.forEach((place, pi) => {
+    const div = document.createElement('div');
+    div.className = 'place-card';
+    div.innerHTML = `
+      <div class="place-header" data-pi="${pi}">
+        <span class="place-icon">${esc(place.icon||'📍')}</span>
+        <input class="place-name-f" value="${esc(place.name)}" placeholder="Nombre del lugar...">
+        <span style="font-family:'Cinzel',serif;font-size:.55em;color:var(--muted)">${(place.quests||[]).length} misiones</span>
+        <button class="btn-del place-del" title="Eliminar lugar">×</button>
+        <span class="place-chevron ${place.open?'open':''}">▶</span>
+      </div>
+      <div class="place-body ${place.open?'open':''}">
+        <div style="padding:8px 0">
+          <button class="btn-add btn-add-quest" data-ri="${ri}" data-pi="${pi}">+ Nueva Misión</button>
+        </div>
+        <div class="quests-container" data-pi="${pi}"></div>
+      </div>`;
+    
+    // Toggle
+    div.querySelector('.place-header').addEventListener('click', e => {
+      if(e.target.tagName==='INPUT'||e.target.tagName==='BUTTON') return;
+      place.open = !place.open; saveD(); renderRegions();
+    });
+    
+    // Name edit
+    div.querySelector('.place-name-f').addEventListener('input', debounce(() => {
+      place.name = div.querySelector('.place-name-f').value; saveD(); updateStats();
+    },300));
+    
+    // Delete place
+    div.querySelector('.place-del').onclick = function(e){
+      e.preventDefault(); e.stopPropagation();
+      if(confirm(`¿Eliminar "${place.name}" y todas sus misiones?`)){
+        region.places.splice(pi,1); saveD(); renderRegions(); updateStats();
+      }
+    };
+    
+    // Add quest button
+    div.querySelector('.btn-add-quest').onclick = function(e){
+      e.preventDefault(); e.stopPropagation();
+      openQuestModal(ri, pi);
+    };
+    
+    container.appendChild(div);
+    
+    // Render quests inside
+    renderQuests(div.querySelector('.quests-container'), ri, pi);
+  });
+}
+
+// ══════════════════════════════
+// RENDER QUESTS
+// ══════════════════════════════
+function renderQuests(container, ri, pi){
+  const place = DATA.regions[ri].places[pi];
+  if(!place.quests) place.quests = [];
+  container.innerHTML = '';
+  
+  place.quests.forEach((quest, qi) => {
+    const div = document.createElement('div');
+    div.className = 'quest-card';
+    
+    const tasks = quest.tasks || [];
+    const doneCount = tasks.filter(t=>t.done).length;
+    
+    div.innerHTML = `
+      <div class="quest-head">
+        <input class="quest-title-f" value="${esc(quest.title)}" placeholder="Título de la misión...">
+        <button class="btn-del quest-del" title="Eliminar misión">×</button>
+      </div>
+      
+      ${buildPills(quest)}
+      
+      <div class="quest-meta">
+        <div class="quest-meta-item">
+          <label>Nivel</label>
+          <input class="quest-meta-input q-level" value="${esc(quest.level||'')}" placeholder="Ej: 1-3">
+        </div>
+        <div class="quest-meta-item">
+          <label>Facción / NPC</label>
+          <input class="quest-meta-input q-npc" value="${esc(quest.npc||'')}" placeholder="Quién da la misión">
+        </div>
+        <div class="quest-meta-item">
+          <label>Oro</label>
+          <input class="quest-meta-input q-gold" value="${esc(quest.gold||'')}" placeholder="Recompensa en gp">
+        </div>
+      </div>
+      
+      <div class="quest-field">
+        <label>Hook / Introducción</label>
+        <textarea class="quest-input q-hook" placeholder="Cómo se presenta la misión a los jugadores...">${esc(quest.hook||'')}</textarea>
+      </div>
+      
+      <div class="quest-field">
+        <label>Desarrollo</label>
+        <textarea class="quest-input q-dev" placeholder="Qué ocurre durante la misión, qué deben hacer...">${esc(quest.dev||'')}</textarea>
+      </div>
+      
+      <div class="quest-section">
+        <h4>✓ Tareas / Objetivos (${doneCount}/${tasks.length})</h4>
+        <div class="task-list"></div>
+        <button class="btn-small add-task-btn" style="margin-top:6px">+ Añadir tarea</button>
+      </div>
+      
+      <div class="quest-section">
+        <h4>⚡ Variaciones</h4>
+        <div class="variations-list"></div>
+        <button class="btn-small add-var-btn" style="margin-top:6px">+ Añadir variación</button>
+      </div>
+      
+      <div class="reward-box">
+        <h4>💰 Recompensas</h4>
+        <textarea class="quest-input q-reward" placeholder="Oro, objetos, información, contactos...">${esc(quest.reward||'')}</textarea>
+      </div>
+      
+      <div class="quest-section">
+        <h4>📋 Consecuencias</h4>
+        <textarea class="quest-input q-conseq" placeholder="Qué pasa si se completa, qué pasa si se ignora...">${esc(quest.conseq||'')}</textarea>
+      </div>
+      
+      <div class="gm-notes">
+        <h4>🔒 Notas del DM</h4>
+        <textarea class="quest-input q-gm" placeholder="Información solo para el Dungeon Master...">${esc(quest.gm||'')}</textarea>
+      </div>`;
+    
+    // Title
+    div.querySelector('.quest-title-f').addEventListener('input', debounce(() => {
+      quest.title = div.querySelector('.quest-title-f').value; saveD();
+    },300));
+    
+    // Delete quest
+    div.querySelector('.quest-del').onclick = function(e){
+      e.preventDefault(); e.stopPropagation();
+      if(confirm(`¿Eliminar "${quest.title}"?`)){
+        place.quests.splice(qi,1); saveD(); renderRegions(); updateStats();
+      }
+    };
+    
+    // Pills
+    attachPills(div, quest, () => renderRegions());
+    
+    // Meta fields
+    ['level','npc','gold'].forEach(f => {
+      const el = div.querySelector(`.q-${f}`);
+      el.addEventListener('input', debounce(() => { quest[f]=el.value; saveD(); },300));
+    });
+    
+    // Text areas
+    ['hook','dev','reward','conseq','gm'].forEach(f => {
+      const el = div.querySelector(`.q-${f}`);
+      ar(el);
+      el.addEventListener('input', () => { quest[f]=el.value; ar(el); saveD(); });
+    });
+    
+    // Tasks
+    const taskList = div.querySelector('.task-list');
+    tasks.forEach((t,ti) => renderTask(taskList, t, ti, quest, () => renderRegions()));
+    div.querySelector('.add-task-btn').onclick = function(e){
+      e.preventDefault();
+      if(!quest.tasks) quest.tasks=[];
+      quest.tasks.push({id:uid(), text:'', done:false});
+      saveD(); renderRegions();
+    };
+    
+    // Variations
+    const varList = div.querySelector('.variations-list');
+    (quest.variations||[]).forEach((v,vi) => renderVariation(varList, v, vi, quest, () => renderRegions()));
+    div.querySelector('.add-var-btn').onclick = function(e){
+      e.preventDefault();
+      if(!quest.variations) quest.variations=[];
+      quest.variations.push({id:uid(), label:'Variación', content:''});
+      saveD(); renderRegions();
+    };
+    
+    container.appendChild(div);
+  });
+}
+
+function renderTask(container, task, ti, quest, renderFn){
+  const div = document.createElement('div');
+  div.className = 'task-item';
+  div.innerHTML = `
+    <div class="task-cb ${task.done?'done':''}">${task.done?'✓':''}</div>
+    <input class="task-text ${task.done?'done-text':''}" value="${esc(task.text)}" placeholder="Objetivo...">
+    <button class="btn-del task-del" style="font-size:.85em">×</button>`;
+  
+  div.querySelector('.task-cb').onclick = function(e){
+    e.preventDefault(); e.stopPropagation();
+    quest.tasks[ti].done = !quest.tasks[ti].done;
+    saveD(); renderFn();
+  };
+  div.querySelector('.task-text').addEventListener('input', debounce(() => {
+    quest.tasks[ti].text = div.querySelector('.task-text').value; saveD();
+  },300));
+  div.querySelector('.task-del').onclick = function(e){
+    e.preventDefault(); e.stopPropagation();
+    quest.tasks.splice(ti,1); saveD(); renderFn();
+  };
+  container.appendChild(div);
+}
+
+function renderVariation(container, varItem, vi, quest, renderFn){
+  const div = document.createElement('div');
+  div.className = 'variation-item';
+  div.innerHTML = `
+    <label>Variación ${String.fromCharCode(65+vi)}</label>
+    <div style="display:flex;gap:6px;margin-bottom:4px">
+      <input class="quest-meta-input var-label" value="${esc(varItem.label||'')}" placeholder="Nombre/tipo..." style="flex:1">
+      <button class="btn-del var-del">×</button>
+    </div>
+    <textarea class="quest-input var-content" placeholder="Descripción de esta variación...">${esc(varItem.content||'')}</textarea>`;
+  
+  div.querySelector('.var-label').addEventListener('input', debounce(() => {
+    quest.variations[vi].label = div.querySelector('.var-label').value; saveD();
+  },300));
+  div.querySelector('.var-content').addEventListener('input', () => {
+    quest.variations[vi].content = div.querySelector('.var-content').value;
+    ar(div.querySelector('.var-content')); saveD();
+  });
+  div.querySelector('.var-del').onclick = function(e){
+    e.preventDefault(); e.stopPropagation();
+    quest.variations.splice(vi,1); saveD(); renderFn();
+  };
+  container.appendChild(div);
+}
+
+// ══════════════════════════════
+// MODALS FOR CREATION
+// ══════════════════════════════
+
+// New Region
+document.getElementById('btn-add-region').addEventListener('click', () => {
+  openModal(`
+    <div class="modal-title">Nueva Región</div>
+    <label>Nombre de la Región</label>
+    <input id="mn" placeholder="Ej: Valle de Dessarin, Phandalin, Camino de Triboar...">
+    <label>Descripción (opcional)</label>
+    <textarea id="md" placeholder="Contexto general de esta región..."></textarea>`,
+  () => {
+    DATA.regions.push({
+      id:uid(),
+      name: gv('mn') || 'Nueva Región',
+      desc: gv('md'),
+      places:[],
+      open:true
+    });
+    saveD(); renderRegions();
+  });
+});
+
+function openPlaceModal(ri){
+  openModal(`
+    <div class="modal-title">Nuevo Lugar</div>
+    <label>Icono (emoji)</label>
+    <input id="mi" placeholder="🏰" style="font-size:1.4em;width:80px">
+    <label>Nombre del Lugar</label>
+    <input id="mn" placeholder="Ej: Posada Stonehill, Vado de Cony, Red Larch...">
+    <label>Descripción corta (opcional)</label>
+    <textarea id="md" placeholder="Qué es este lugar..."></textarea>`,
+  () => {
+    if(!DATA.regions[ri].places) DATA.regions[ri].places=[];
+    DATA.regions[ri].places.push({
+      id:uid(),
+      icon: gv('mi') || '📍',
+      name: gv('mn') || 'Nuevo Lugar',
+      desc: gv('md'),
+      quests:[],
+      open:true
+    });
+    saveD(); renderRegions();
+  });
+}
+
+function openQuestModal(ri, pi){
+  openModal(`
+    <div class="modal-title">Nueva Misión Dinámica</div>
+    <label>Título de la Misión</label>
+    <input id="mt" placeholder="Ej: El Carretero que No Llegó...">
+    <label>Nivel Recomendado</label>
+    <input id="ml" placeholder="Ej: 1-3, 3-5, 5-7">
+    <label>Facción / NPC</label>
+    <input id="mnpc" placeholder="Quién ofrece la misión">
+    <label>Hook (Introducción)</label>
+    <textarea id="mh" placeholder="Cómo se presenta la misión a los jugadores..."></textarea>`,
+  () => {
+    const place = DATA.regions[ri].places[pi];
+    if(!place.quests) place.quests=[];
+    place.quests.push({
+      id:uid(),
+      title: gv('mt') || 'Nueva Misión',
+      level: gv('ml'),
+      npc: gv('mnpc'),
+      hook: gv('mh'),
+      dev:'', reward:'', conseq:'', gm:'',
+      status:'disponible',
+      variations:[], tasks:[]
+    });
+    saveD(); renderRegions();
+  });
+}
+
+// ══════════════════════════════
+// SEED DATA
+// ══════════════════════════════
+function seedIfEmpty(){
+  if(DATA.regions.length > 0) return;
+  
+  DATA.regions = [
+    {
+      id:uid(), name: 'Valle de Dessarin', desc: 'Zona central del conflicto elemental. Red Larch como hub logístico.',
+      open:true, places:[
+        {
+          id:uid(), icon:'🏘️', name:'Red Larch', desc:'Pueblo comercial, fachada del Canoso.',
+          open:true, quests:[
+            {
+              id:uid(), title:'Los Nettlebee Tienen un Problema', level:'2-4', npc:'Wiggan Nettlebee',
+              hook:'Wiggan Nettlebee llega al pueblo con expresion preocupada. Sus pastos al norte han empezado a morir desde adentro. Ha perdido seis vacas en dos semanas.',
+              dev:'Los pastos muertos forman un semicirculo irregular. Naturaleza CD 13: la muerte viene de abajo. Investigacion CD 14: patron de grietas que converge hacia un punto central. Excavando se encuentra una piedra negra octogonal del Culto de la Tierra.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Simple', content:'La piedra fue plantada por un agente sin que Wiggan lo supiera.'},
+                {id:uid(), label:'Con capas', content:'Wiggan sabe mas de lo que dice. Si lo presionan, nota incomodidad cuando se menciona Red Larch.'},
+                {id:uid(), label:'Urgente', content:'La piedra no esta sola. Hay tres mas. Si no se encuentran todas, el patron se reactiva.'}
+              ],
+              reward:'8 po de Wiggan mas una semana de alojamiento en su granja.',
+              conseq:'Si completa: pastos recuperados. Wiggan paga. Si ignora: terreno convertido en punto de acceso subterraneo para el culto.',
+              gm:'Wiggan es miembro menor del Culto de la Tierra Aplastante, encubierto. Su motivacion real: necesita que alguien externo investigue antes de que el culto use ese terreno.'
+            },
+            {
+              id:uid(), title:'La Melodia que no Deberia Existir', level:'2-3', npc:'Dusk (bardo), Windharrow',
+              hook:'Un bardo llamado Dusk lleva dos noches tocando en la taberna. Una cancion instrumental causa pesadillas a quienes la escuchan.',
+              dev:'Arcana CD 12: contiene frecuencia elemental baja. Es resonancia de aire comprimido que afecta el sistema nervioso. Dusk aprendio la pieza de un musico en Triboar que le pago bien.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Neutra', content:'Musica de resonancia elemental sin instrucciones codificadas.'},
+                {id:uid(), label:'Con red', content:'La pieza contiene instrucciones codificadas. Un cliente especifico las espera.'},
+                {id:uid(), label:'Complicada', content:'Dusk tiene signos de encantamiento residual. Alguien modifico su memoria.'}
+              ],
+              reward:'Descuento en alojamiento. Informacion sobre patrones de comunicacion del Culto del Aire.',
+              conseq:'Si completa: Dusk puede ser fuente de informacion. Si ignora: el Culto del Aire recibe actualizacion de estado.',
+              gm:'Windharrow, cortesano musical de Aerisi Kalinoth, creo la melodia como experimento estetico y canal de comunicacion.'
+            },
+            {
+              id:uid(), title:'El Arquitecto sin Memoria', level:'3-4', npc:'Chiyo Stormwatch',
+              hook:'Una tiefling llamada Chiyo lleva tres dias en la posada, bebiendo en silencio y preguntando por mapas de las Colinas de Sumber. Puede dibujar un lugar que jura no haber visitado nunca.',
+              dev:'Chiyo fue ladrana que acepto robar planos de construccion de una estructura en las Colinas. Fue sometida a borrado de memoria por agentes del Culto del Aire. Solo le quedo el mapa instintivo.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Simple', content:'Planos de seccion secundaria sin valor critico.'},
+                {id:uid(), label:'Valiosa', content:'Planos incluyen ubicacion de camara de almacenamiento de armas elementales.'},
+                {id:uid(), label:'Peligrosa', content:'El gremio que contrato a Chiyo era frente del propio Culto del Aire.'}
+              ],
+              reward:'Planos parciales del Templo del Odio Aullante. Chiyo como aliada potencial.',
+              conseq:'Si completa: ventaja tactica futura. Si ignora: los planos se pierden sin impacto principal.',
+              gm:'Los planos que Chiyo dibuja son de una seccion del Templo del Odio Aullante con precision que la aterra.'
+            }
+          ]
+        },
+        {
+          id:uid(), icon:'⛪', name:'Monasterio de la Piedra Sagrada', desc:'Fachada del Culto de la Tierra.',
+          open:false, quests:[
+            {
+              id:uid(), title:'El Prisionero Olvidado', level:'5-7', npc:'Braelen Hatherhand, Hellenrae',
+              hook:'Un miembro de la delegacion de Mirabar, el historiador Braelen Hatherhand, no fue enviado a las minas. Hellenrae lo mantiene separado porque sus manuscritos contienen mapas sobre Besilmer.',
+              dev:'Braelen esta en celda de acceso restringido. Esta debil pero furioso. Sus manuscritos describen localizacion de entrada secundaria a Tyar-Besil que evita niveles de guardia.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Directa', content:'Rescatan a Braelen antes de que el culto consiga lo que quiere.'},
+                {id:uid(), label:'Parcial', content:'Hellenrae ya obligo a traducir parte. La entrada es conocida pero no utilizada aun.'},
+                {id:uid(), label:'Tragica', content:'Braelen muere horas antes de llegar. Los manuscritos estan en escritorio de Hellenrae.'}
+              ],
+              reward:'Acceso permanente a historia de Besilmer. Ventaja tactica en asalto al Templo.',
+              conseq:'Si completa: Braelen como fuente permanente. Si ignora: entrada secundaria sellada permanentemente.',
+              gm:'Braelen puede identificar objetos magicos con origen en antiguo reino enano sin tirada de Arcana.'
+            },
+            {
+              id:uid(), title:'El Monje que Pregunta Demasiado', level:'4-5', npc:'Gerd Duskfall',
+              hook:'Un monje enano llamado Gerd Duskfall llega buscando el Monasterio para renovar acuerdos de intercambio de conocimientos. Nadie sabe exactamente donde esta, lo cual le parece sospechoso.',
+              dev:'Convencer a Gerd de que no vaya requiere Persuasion CD 14. Desde colina cercana puede ver senales: guardias armadas, prisioneros trabajando, triangulo invertido en arco.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Salvamiento limpio', content:'Gerd convencido sin ser visto. Regresa a su orden con informe.'},
+                {id:uid(), label:'Con escalada', content:'Explorador del monasterio ve a Gerd. Envia rastreador.'},
+                {id:uid(), label:'Con info', content:'Gerd trae textos del acuerdo original firmados hace 40 anos por miembros del Culto.'}
+              ],
+              reward:'Mapa interior parcial. Gerd como aliado menor CR 0.25.',
+              conseq:'Si completa: orden envia recursos de apoyo. Si ignora: Gerd capturado y convertido en prisionero.',
+              gm:'El acuerdo original era tapadera para obtener acceso a archivos sobre historia de Besilmer.'
+            }
+          ]
+        },
+        {
+          id:uid(), icon:'🏰', name:'Guarida de Rivergard', desc:'Base del Culto de la Ola Aplastante.',
+          open:false, quests:[
+            {
+              id:uid(), title:'Deuda de Sangre en el Rio', level:'4-6', npc:'Shoalar Quanderil, Torvin Aldas',
+              hook:'Una familia de pescadores ha perdido dos barcas en una semana. El padre, Torvin, jura que la ultima tiene iniciales de Shoalar Quanderil talladas en el casco.',
+              dev:'La barca esta amarrada en muelle norte de Rivergard. Requiere infiltracion, negociacion o fuerza. Shoalar reconoce la barca como presa de guerra.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Diplomatica', content:'Infiltrado Harper facilita acceso sin combate mayor.'},
+                {id:uid(), label:'Violenta', content:'Los hijos de Torvin no estan muertos: retenidos como mano de obra forzada.'},
+                {id:uid(), label:'Moral', content:'La barca transportaba bienes robados. Dueno reclama carga.'}
+              ],
+              reward:'Rutas de patrulla del rio (ventaja tactica). Aliados menores con conocimiento del rio.',
+              conseq:'Si completa: ventaja en iniciativa en asalto. Si ignora: Torvin abandona. Sin impacto principal.',
+              gm:'Torvin puede testificar ante la Alianza de los Senores sobre movimientos piratas del culto.'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id:uid(), name: 'Phandalin y Alrededores', desc: 'Zona inicial. Presencia Redbrand y conexiones con LMoP.',
+      open:true, places:[
+        {
+          id:uid(), icon:'🏠', name:'Phandalin - Pueblo', desc: 'Bajo influencia Redbrand. Varios NPCs clave.',
+          open:true, quests:[
+            {
+              id:uid(), title:'La Queja del Herrera', level:'1-2', npc:'Grista Ironmantle',
+              hook:'La herrera Grista tiene un problema: alguien le roba hierro en bruto del almacen trasero, no de noche sino durante el dia.',
+              dev:'Tres adolescentes del pueblo llevan el hierro a punto de entrega en el cementerio. No son ladrones voluntarios: alguien les pago. El contratante era hombre mayor con guantes de piel oscura.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Simple', content:'Adolescentes oportunistas. Comprador era herrero de paso sin afiliacion.'},
+                {id:uid(), label:'Con capas', content:'Hierro destinado a herramientas de excavacion para Culto de la Tierra bajo Colinas de Sumber.'},
+                {id:uid(), label:'Complicada', content:'Uno de los adolescentes es hijo del alcalde Harbin Wester.'}
+              ],
+              reward:'2 po mas objeto menor fabricado a medida. Pista hacia red logistica del Culto.',
+              conseq:'Si completa: Grista deja de vender a desconocidos. Si ignora: precios suben 10%. Culto recibe material.',
+              gm:'La carreta usada tiene defecto especifico en llanta derecha. Mismo patron en Suministros Delder de Red Larch.'
+            },
+            {
+              id:uid(), title:'Correo sin Destinatario', level:'1-2', npc:'Sildar Hallwinter',
+              hook:'Sildar recibio carta sellada de la Alianza pero el nombre del destinatario fue alterado. Bajo la raspadura: Iarno Albrek.',
+              dev:'La carta llego con correo de Triboar. Mensajero recibio carta de hombre alto con capa gris y anillo de arana. Carta alterada para que Sildar leyera instrucciones para Glasstaff.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Simple', content:'Error de mensajeria sin conspiracion adicional.'},
+                {id:uid(), label:'Reveladora', content:'Carta codificada revela que Glasstaff pidio refuerzos para excavar bajo Tres Faroles.'},
+                {id:uid(), label:'Peligrosa', content:'El hombre del anillo aun esta en la region. Los personajes reciben advertencia anonima.'}
+              ],
+              reward:'Confianza de Sildar. Info sobre excavacion bajo mansion. Pista hacia red de Nezznar.',
+              conseq:'Si completa: Sildar convencido de que Iarno esta activo. Si ignora: informacion perdida.',
+              gm:'Albrecht es Glasstaff. Trabaja para Nezznar quien usa a los Redbrand como distraccion.'
+            },
+            {
+              id:uid(), title:'El Aprendiz Desaparecido', level:'2-3', npc:'Daran Edermath, Finn Oakhurst',
+              hook:'Daran Edermath pide localizar a Finn Oakhurst, semielfo que fue su aprendiz informal. Desaparecio tras decir que encontro algo en el bosque norte.',
+              dev:'Finn siguio columna de humo verde. Encontro restos de campamento de Culto del Fuego con cofre de instrucciones. Un cultista lo tiene retenido en gruta esperando instrucciones.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Simple', content:'Cultista de bajo rango libera a Finn a cambio de no ser reportado.'},
+                {id:uid(), label:'Informativa', content:'Instrucciones quemadas contienen referencia a punto de encuentro en colinas.'},
+                {id:uid(), label:'Complicada', content:'Finn no quiere irse. Empatizo con el cultista joven desilusionado.'}
+              ],
+              reward:'10 po de Daran. Info Harper sobre red de Arana Negra. Coordenadas de campamento temporal.',
+              conseq:'Si completa: Daran comparte info sobre Arana Negra. Si ignora: Finn muere eventualmente. Daran se distancia.',
+              gm:'Las instrucciones parcialmente quemadas pueden llevar a interceptar comunicacion entre agentes del Fuego.'
+            },
+            {
+              id:uid(), title:'El Tesoro del Nothic', level:'2-3', npc:'Nothic, Glasstaff',
+              hook:'El Nothic del pozo en escondite Redbrand tiene trato con Glasstaff: guarda pozo a cambio de carne. Acumulo objetos en fondo, incluyendo diario que Glasstaff queria destruir.',
+              dev:'Nothic puede ser persuadido a revelar contenido a cambio de promesa de eliminar a Glasstaff. Diario pertenece a Redbrand que descubrio vinculo Redbrand-Arana Negra.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Simple', content:'Saco contiene diario y objetos de poco valor.'},
+                {id:uid(), label:'Con objeto', content:'Cristal de comunicacion roto con ecos de voz de Arana Negra.'},
+                {id:uid(), label:'Moral', content:'Hay persona viva en fondo del pozo: mensajero de Alianza con carta para Sildar.'}
+              ],
+              reward:'Diario del Redbrand (evidencia). Cristal roto (evidencia auditiva). Mensajero rescatado (info Alianza).',
+              conseq:'Si completa: confirmacion de vinculo antes de asaltar. Si ignora: diario permanece. Sin impacto.',
+              gm:'El Nothic esta genuinamente resentido con Glasstaff quien redujo pagos de carne.'
+            }
+          ]
+        },
+        {
+          id:uid(), icon:'🌲', name:'Ruinas de Thundertree', desc:Bosque peligroso. Ash zombies. Venomfang.',
+          open:false, quests:[
+            {
+              id:uid(), title:'El Rumor del Druida Loco', level:'3-4', npc:'Reidoth',
+              hook:'En Phandalin corre rumor de que Reidoth actua de forma extraña. Cazador lo vio hablando solo rodeado de animales muertos en circulo. Suelo parecia vibrar.',
+              dev:'Reidoth preparo ofrendas para conexion druida profunda. Recibio corriente caotica que lo desoriento. No esta loco: esta aterrorizado de algo que percibio.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Misericordiosa', content:'Con descanso y cuidado se recupera. Percibe pulso no natural, como latidos.'},
+                {id:uid(), label:'Con info', content:'Recuerda que corriente venia del este. Puede dibujar ruta hasta punto de origen.'},
+                {id:uid(), label:'Urgente', content:'Reidoth no mejora. Personajes deben encontrar fuente e interrumpirla.'}
+              ],
+              reward:'Confianza de Reidoth. Info sobre geografia entre Phandalin y Colinas de Sumber.',
+              conseq:'Si completa: Reidoth como guia o fuente de info. Da info sobre Castillo Cragmaw sin negociacion. Si ignora: ruinas expanden zona afectada.',
+              gm:'Lo que Reidoth percibio es percepcion druida del estado de sellos elementales.'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id:uid(), name: 'Camino de Triboar y Vado', desc: 'Ruta comercial clave. Sello Fuego/Tierra cerca.',
+      open:false, places:[
+        {
+          id:uid(), icon:'🛤️', name:'Camino de Triboar', desc:'Ruta principal. Variados eventos.',
+          open:true, quests:[
+            {
+              id:uid(), title:'El Carretero que No Llego', level:'1-3', npc:'Bramble Cardo de Espino',
+              hook:'Bramble del Vado de Cony espera cargamento desde Triboar hace tres dias. Carretero Perrin Gallos nunca llego. Ofrece 4 po por respuestas.',
+              dev:'Carromato abandonado a media legua al norte. Ruedas intactas. Bueyes desaparecidos. Carga intacta. Huellas de arrastre hacia bosque: alguien fue llevado.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Neutra', content:'Bandidos jovenes de pueblo cercano. Pueden rendirse.'},
+                {id:uid(), label:'Informativa', content:'Bandidos escondieron caja con sello de Suministros Delder. Velas de llama verde.'},
+                {id:uid(), label:'Peligrosa', content:'Perrin no esta solo: mujer herida exploradora del Valle con mapa parcial.'}
+              ],
+              reward:'4 po. Pista tangible hacia red logistica Culto Tierra. Mapa parcial si rescataron exploradora.',
+              conseq:'Si completa: Bramble en deuda de info. Perrin como fuente de chismes. Si ignora: Perrin muere o liberado. Caja llega o se pierde.',
+              gm:'La caja de cera negra conecta con mision 05 de Red Larch (Nettlebee). Encadenamiento posible.'
+            },
+            {
+              id:uid(), title:'El Testamento del Enano Muerto', level:'2-3', npc:'Gerd Korrin, Gundren Rockseeker',
+              hook:'Enano muerto en camino norte con carta sin enviar para Gundren. Nota en enano antiguo: el fuego guarda el sello. Amuleto del clan Rockseeker.',
+              dev:'Gerd Korrin fue explorador para Rockseeker. Encontro rastros actividad reciente. Emboscado por flecha con plumas verdes (Culto Aire). Sabia algo de sellos o Cueva del Eco.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Simple', content:'Encontro indicios de campamentos sin implicaciones elementales.'},
+                {id:uid(), label:'Con lore', content:'Lleva piedra de anclaje elemental con simbolos del Pacto de Phandelver original.'},
+                {id:uid(), label:'Urgente', content:'Asesinos (Culto Aire) aun en area. Observan si permanecen junto cuerpo.'}
+              ],
+              reward:'Amuleto Rockseeker (Gundren en deuda). Piedra runica. Info sobre vigilancia camino.',
+              conseq:'Si entregan a Gundren: retrasa entrada a Cueva. Ventaja narrativa. Si ignoran: cuerpo recuperado por Culto Aire.',
+              gm:'Kaelthas reconoceria piedra de anclaje como pieza original del sistema de contencion.'
+            },
+            {
+              id:uid(), title:'La Caravana de los Harpers', level:'3-5', npc:'Harpers, Ghald',
+              hook:'Caravana de tres carromatos hacia Yartar con dos dias de retraso. Cargo real: mensajero Harper con documentos sobre movimientos de cultos. Detenida por matones de Sociedad del Kraken.',
+              dev:'Matones tienen caravana en granero abandonado. Ocho hombres bien equipados. Mensajero Harper no ha revelado identidad. Oficial sabe valor de documentos pero no contenido.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Directa', content:'Caravana liberada. Mensajero como contacto en Yartar.'},
+                {id:uid(), label:'Con implicaciones', content:'Ghald coordina personalmente. Problema CR 7 si se identifica.'},
+                {id:uid(), label:'Moral', content:'Un maton es de Red Larch que perdio trabajo cuando Redbrand tomaron pueblo.'}
+              ],
+              reward:'20 po. Contacto activo Yartar. Info sobre Sociedad Kraken si identificaron a Ghald.',
+              conseq:'Si completa: Harpers aumentan apoyo. Si ignoran: documentos a Kraken. Agentes expuestos. Red comprometida.',
+              gm:'Documentos revelan que Harpers saben sobre cultos. Exposicion pone en peligro agentes en Valle.'
+            }
+          ]
+        },
+        {
+          id:uid(), icon:'🌉', name:'Vado de Cony', desc:'Posada La Rueda Rota. Sello Fuego/Tierra debajo.',
+          open:false, quests:[
+            {
+              id:uid(), title:'El Puente Que Quema', level:'2-4', npc:'Lessa la Mercenaria',
+              hook:'Puente de piedra del Vado emana calor inusual. Viajeros reportan piedras calientes de noche. Lessa vio hombres encapuchados examinando cimientos a medianoche.',
+              dev:'Puente construido encima de sello secundario Fuego/Tierra. Seressa perfora desde cueva oculta. Calor es sello fallando. Encapuchados colocan resonadores de piedra volcanica.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Simple', content:'Inscripciones antiguas en dwarvish describen prision de fuego.'},
+                {id:uid(), label:'Con info', content:'Encapuchado lleva tatuaje que Lessa reconoce de compania mercenaria.'},
+                {id:uid(), label:'Urgente', content:'Calor intensifica con tormenta electrica cercana.'}
+              ],
+              reward:'20 po. Info sobre rutas alternativas. Cuerda escalada.',
+              conseq:'Si completa: puente estable. Si ignora: colapsa acelerando ruptura sello en semanas.',
+              gm:'Lessa deserto de compania mercenaria que ahora trabaja PARA Culto de la Tierra.'
+            },
+            {
+              id:uid(), title:'Seressa y el Tunel Norte', level:'3-5', npc:'Seressa, exploradores',
+              hook:'Exploradores reportan actividad en cuevas bajo Vado: luces rojas, olor quemado, mujer de cabello oscuro que advirtio no es momento todavia.',
+              dev:'Mujer es Seressa, cultista Llama Eterna. Ordenes: debilitar sello Fuego/Tierra SIN romperlo. Tunel norte conecta con sistema escape hacia Red Larch.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Negociacion', content:'Seressa prefiere negociar escape. Tiene info valiosa sobre otros cultos.'},
+                {id:uiD(), label:'Info', content:'Tunel norte tiene marcas de paso reciente de enanos. Mano de obra forzada?'},
+                {id:uid(), label:'Coordinacion', content:'Seressa menciona los otros tres ya avanzan. Coordinacion entre cultos.'}
+              ],
+              reward:'21 po. Info sobre cuevas. Frasco aceite alquimico.',
+              conseq:'Si confrontan: Seressa puede dar info sobre otros cultos. Si ignoran: operacion continua.',
+              gm:'Seressa tiene quemaduras en antebrazos - precio de trabajar cerca de sello de Fuego.'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id:uid(), name: 'Colinas y Otros', desc:'Ubicaciones dispersas. Aguja de las Plumas, etc.',
+      open:false, places:[
+        {
+          id:uid(), icon:'🗡️', name:'Aguja de las Plumas', desc:'Base Caballeros Pluma Gris. Culto Aire.',
+          open:false, quests:[
+            {
+              id:uid(), title:'El Precio del Viento', level:'5-6', npc:'Thurl Merosska, Oswin',
+              hook:'Aldea de pastores paga tributo mensual a Caballeros de Pluma Gris. Tributo triplicado en dos meses. Hijo del alcalde Oswin retenido como garantia.',
+              dev:'Hijo (Aldric) en establos como garantia. Thurl usa presion no violencia. Tributo financia mochilas vuelo y antorchas llama verde.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Limpia', content:'Aldric liberado sin que Thurl descubra. Aldea reduce tributo gradualmente.'},
+                {id:uid(), label:'Confrontacional', content:'Thurl descubre plan y deja ir a Aldric deliberadamente: candidatos de reclutamiento.'},
+                {id:uid(), label:'Reveladora', content:'Aldric memorizo turnos de guardia y codigo de acceso a escaleras nivel superior.'}
+              ],
+              reward:'Alojamiento en aldea. Info tactica Aguja si Aldric memorizo codigos. Oferta reclutamiento si Thurl la hizo.',
+              conseq:'Si completa: aldea como punto seguro. Si ignora: aldea vacia. Culto pierde fuente pero no significativo.',
+              gm:'Thurl puede ofrecer reclutamiento si ve a los personajes actuar bajo presion.'
+            }
+          ]
+        },
+        {
+          id:uid(), icon:'🏚️', name:'Escondite Redbrand', desc:'Cuarteles banda criminal. Conexion Nezznar.',
+          open:false, quests:[
+            {
+              id:uid(), title:'Problemas con Redbrand en Camino del Rio', level:'2-4', npc:'Toblen Stonehill',
+              hook:'Redbrand montaron puesto de peaje ilegal en camino del rio. Cobran a comerciantes. Toblen perdio clientes.',
+              dev:'Puesto operado por 6 Redbrand liderados por Grigor. Ordenes de recoger impuesto para Iarno en Tres Faroles. Financia excavaciones importantes.',
+              status:'disponible',
+              variations:[
+                {id:uid(), label:'Info', content:'Grigor conoce horario guardia cuartel Redbrand y nombre de quienes entran/salen de Tres Faroles.'},
+                {id:uid(), label:'Tunel', content:'Nels, reclutado forzado, conoce tunel secreto a Tres Faroles.'},
+                {id:uid(), label:'Conexion', content:'Grigor lleva tatuaje de gremio criminal de Neverwinter que emplea a Glasstaff.'}
+              ],
+              reward:'35 po. Hospedaje gratis Stonehill. Vino selecto. Info movimientos Redbrand.',
+              conseq:'Si completa: camino libre. Si ignora: extorsion continua. Redbrand fortalecen posicion.',
+              gm:'Entre objetos confiscados hay amuleto con simbolo gnome - conexion excavaciones Nezznar.'
+            }
+          ]
+        }
+      ]
+    }
+  ];
+  
+  saveD();
+}
+
+// ══════════════════════════════
+// INIT
+// ══════════════════════════════
+loadD();
+seedIfEmpty();
+renderRegions();
+</script>
+</body>
+</html>
